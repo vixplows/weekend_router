@@ -1,0 +1,27 @@
+{
+  "name": "weekend_router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "bundle": "cd client && webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vixplows/weekend_router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vixplows/weekend_router/issues"
+  },
+  "homepage": "https://github.com/vixplows/weekend_router#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "webpack": "^3.5.3"
+  }
+}
