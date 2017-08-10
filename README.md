@@ -1,4 +1,4 @@
-# weekend_router: team project
+# weekend_router:
 
 ## Built With
 
