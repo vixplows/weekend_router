@@ -1,7 +1,7 @@
 var MapWrapper = require('./mapWrapper.js')
 
-var routeSelected = function() {
-  console.log(this);
+var routeSelected = function(evt) {
+  console.log("routeSelected");
 }
 
 var entry = function(){
@@ -12,7 +12,7 @@ var entry = function(){
   mainMap.addMarker(center);
 
   var formSubmission = document.querySelector("#submit");
-  formSubmission.addEventListener('onchange', routeSelected);
+  formSubmission.addEventListener('click', routeSelected);
 }
 
 window.addEventListener('load', entry);
