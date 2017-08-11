@@ -21,6 +21,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "google-maps": "^3.2.1",
     "mongodb": "^2.2.31",
     "webpack": "^3.5.3"
   }
