@@ -3,22 +3,27 @@
 
 <head>
   <title>Weekend Router</title>
-  <script type="text/javascript", src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBxB0T4GfkMjt_VV9yKDqYvhK3DizksacI'></script>
+  <script type="text/javascript", src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBxB0T4GfkMjt_VV9yKDqYvhK3DizksacI&libraries=places'></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src='bundle.js'></script>
 </head>
 
 <body>
   <h1>Weekend Router</h1>
-  
+
   <div>
-    <input type="text" name="from" placeholder="From"></input>
-    <input type="text" name="to" placeholder="To"></input>
+    <input id="start-input" type="text" name="start" placeholder="Start"></input>
+    <input id="end-input" type="text" name="end" placeholder="End"></input>
     <input id="submit" type="submit" value="Get Route"></input>
   </div>
-  
+
   <div id='main-map'></div>
 
+  <div id="infowindow-content">
+    <img src="" width="16" height="16" id="place-icon">
+    <span id="place-name"  class="title"></span><br>
+    <span id="place-address"></span>
+  </div>
 
 </body>
 </html>

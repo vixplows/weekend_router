@@ -1,5 +1,5 @@
 var MapWrapper = require('./mapWrapper.js')
-
+var AutoComplete = require('./autoComplete.js')
 var routeSelected = function(evt) {
   console.log("routeSelected");
 }
@@ -13,6 +13,8 @@ var entry = function(){
 
   var formSubmission = document.querySelector("#submit");
   formSubmission.addEventListener('click', routeSelected);
+
+  var auto = new AutoComplete(mainMap)
 }
 
 window.addEventListener('load', entry);
