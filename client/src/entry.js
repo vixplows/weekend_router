@@ -1,24 +1,18 @@
 var MapWrapper = require('./mapWrapper.js')
-// var GoogleMapsLoader = require('google-maps'); 
- 
-// GoogleMapsLoader.load(function(google) {
-//     new google.maps.Map(el, options);
-// });
+
+var routeSelected = function() {
+  console.log(this);
+}
 
 var entry = function(){
   console.log('entry')
   var mapDiv = document.querySelector("#main-map");
-  // GoogleMapsLoader();
-  navigator.geolocation.getCurrentPosition(function(position){
-    var center = {lat: position.coords.latitude, lng: position.coords.longitude};
-    var mainMap = new MapWrapper(mapDiv, center, 10);
-    mainMap.addMarker(center);
-  });
+  var center = {lat: 55.9470, lng: -3.2020}
+  var mainMap = new MapWrapper(mapDiv, center, 10);
+  mainMap.addMarker(center);
+
+  var formSubmission = document.querySelector("#submit");
+  formSubmission.addEventListener('onchange', routeSelected);
 }
-
-
-
-
-
 
 window.addEventListener('load', entry);
