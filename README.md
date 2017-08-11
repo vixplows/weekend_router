@@ -1,5 +1,15 @@
 # weekend_router:
 
+## MVP
+
+Users should be able to:
+
+1. Select start and finish locations for their route
+2. Save routes to a wish-list
+3. Mark completed routes as ‘done’
+
+## Entry.js
+
 ## Built With
 
 * [sublime](https://www.sublimetext.com/) - the lightweight text editor
