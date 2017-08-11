@@ -7,23 +7,29 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src='bundle.js'></script>
 </head>
-
 <body>
-  <h1>Weekend Router</h1>
-
   <div>
-    <input id="start-input" type="text" name="start" placeholder="Start"></input>
-    <input id="end-input" type="text" name="end" placeholder="End"></input>
-    <input id="submit" type="submit" value="Get Route"></input>
+    <h1 id="header">Weekend Router</h1>
+    <div class="inputs">
+      <input id="start-input" type="text" name="start" placeholder="Start"></input>
+      <input id="end-input" type="text" name="end" placeholder="End"></input>
+
+      <div id="radio-killed-the">
+        <input id="hike" type="radio" name="travel-mode" checked value="hike">Hike or</input>
+          <label for="changetype-hike"></label>
+        <input id="bike" type="radio" name="travel-mode" value="bike">Bike</input>
+          <label for="changetype-bike"></label>
+          <input id="submit" type="submit" value="Get Route"></input>
+      </div>
+    </div>
+
+    <div id='main-map'></div>
+
+    <div id="infowindow-content">
+      <img src="" width="16" height="16" id="place-icon">
+      <span id="place-name"  class="title"></span><br>
+      <span id="place-address"></span>
+    </div>
   </div>
-
-  <div id='main-map'></div>
-
-  <div id="infowindow-content">
-    <img src="" width="16" height="16" id="place-icon">
-    <span id="place-name"  class="title"></span><br>
-    <span id="place-address"></span>
-  </div>
-
 </body>
 </html>

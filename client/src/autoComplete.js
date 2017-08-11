@@ -1,12 +1,11 @@
 var AutoComplete = function(map) {
   var startInput = document.getElementById('start-input');
-  // var endInput = document.getElementById('end-input');
+  var endInput = document.getElementById('end-input');
   //
-  // var types = document.getElementById('type-selector');
   //takes route html elements + add html elements
 
   var autocompleteStart = new google.maps.places.Autocomplete(startInput);
-  // var autocompleteEnd = new google.maps.places.Autocomplete(endInput);
+  var autocompleteEnd = new google.maps.places.Autocomplete(endInput);
   //fills input-fields
 
   var infowindow = new google.maps.InfoWindow();
@@ -58,28 +57,7 @@ var AutoComplete = function(map) {
     infowindow.open(map, marker);
   });
 
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
-    radioButton.addEventListener('click', function() {
-      autocompleteStart.setTypes(types);
-    });
-  }////needed for bike and hike feature
-
-  setupClickListener('changetype-all', []);
-  setupClickListener('changetype-address', ['address']);
-  setupClickListener('changetype-establishment', ['establishment']);
-  setupClickListener('changetype-geocode', ['geocode']);
-
-  document.getElementById('use-strict-bounds')
-    .addEventListener('click', function() {
-    console.log('Checkbox clicked! New state=' + this.checked);
-    autocompleteStart.setOptions({strictBounds: this.checked});
-  });
 }
 
 
 module.exports = AutoComplete;
-// </script>
-// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>

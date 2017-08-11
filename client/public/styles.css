@@ -2,13 +2,18 @@ body {
   background-color: #333;
   color: white;
   font-family: courier;
+  max-width: 700px;
+}
+
+#header {
+  text-decoration: underline;
 }
 
 #main-map {
-  height:400px;
-  width:400px;
+  height:600px;
+  width:600px;
 }
 
-#route-form {
-  padding: 10px;
+.inputs {
+  margin: 10px;
 }
