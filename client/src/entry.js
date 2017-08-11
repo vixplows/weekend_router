@@ -12,6 +12,7 @@ var entry = function(){
   navigator.geolocation.getCurrentPosition(function(position){
     var center = {lat: position.coords.latitude, lng: position.coords.longitude};
     var mainMap = new MapWrapper(mapDiv, center, 10);
+    mainMap.addMarker(center);
   });
 }
 
