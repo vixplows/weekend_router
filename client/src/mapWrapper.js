@@ -14,13 +14,13 @@ MapWrapper.prototype.addMarker = function(coords) {
   return marker;
 }
 
-MapWrapper.prototype.geoLocate = function() {
-  navigator.geoLocation.getCurrentPosition(function(position){
-    var center = {lat: position.coords.latitude, lng: position.coords.longitude};
-    this.googleMap.setCenter(center);
-    this.addMarker(center);
-    console.log(this);
-  }.bind(this));
-}
+// MapWrapper.prototype.geoLocate = function() {
+//   navigator.geoLocation.getCurrentPosition(function(position){
+//     var center = {lat: position.coords.latitude, lng: position.coords.longitude};
+//     this.googleMap.setCenter(center);
+//     this.addMarker(center);
+//     console.log(this);
+//   }.bind(this));
+// }
 
 module.exports = MapWrapper

@@ -1,6 +1,7 @@
 body {
   background-color: #333;
   color: white;
+  font-family: courier;
 }
 
 #main-map {
@@ -8,3 +9,6 @@ body {
   width:400px;
 }
 
+#route-form {
+  padding: 10px;
+}
