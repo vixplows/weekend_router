@@ -1,18 +1,20 @@
 var BikeOrHike = function() {
 
-  var types = document.querySelector('.radio-killed-the');//Tv star
+  var types = document.querySelector('#radio-button');//Tv star
 
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
   function setupClickListener(id, types) {
-    var radioButton = document.getElementById(id);
+
+    var radioButton = document.querySelector(id);
     radioButton.addEventListener('click', function(){
-      console.log(types)
+      
     });
   }////needed for bike and hike feature
 
-  setupClickListener('changetype-hike', ['hike']);
-  setupClickListener('changetype-bike', ['bike']);
+  setupClickListener('#hike', ['hike']);
+  setupClickListener('#bike', ['bike']);
+  console.log(this)
 }
 
 module.exports = BikeOrHike;
