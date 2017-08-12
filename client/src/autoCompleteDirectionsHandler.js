@@ -1,4 +1,4 @@
-var AutocompleteDirectionsHandler = function(map) {
+var AutoCompleteDirectionsHandler = function(map) {
   this.map = map;
   this.originPlaceId = null;
   this.destinationPlaceId = null;
@@ -22,15 +22,9 @@ var AutocompleteDirectionsHandler = function(map) {
 
   this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
   this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-  // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-  // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-  // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
 }
 
-  // Sets a listener on a radio button to change the filter type on Places
-  // Autocomplete.
-  AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+  AutoCompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
     var radioButton = document.getElementById(id);
     var me = this;
     radioButton.addEventListener('click', function() {
@@ -39,7 +33,7 @@ var AutocompleteDirectionsHandler = function(map) {
     });
   };
 
-  AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+  AutoCompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
     var me = this;
     autocomplete.bindTo('bounds', this.map);
     autocomplete.addListener('place_changed', function() {
@@ -58,7 +52,7 @@ var AutocompleteDirectionsHandler = function(map) {
 
   };
 
-  AutocompleteDirectionsHandler.prototype.route = function() {
+  AutoCompleteDirectionsHandler.prototype.route = function() {
     if (!this.originPlaceId || !this.destinationPlaceId) {
       return;
     }
@@ -79,4 +73,4 @@ var AutocompleteDirectionsHandler = function(map) {
   }
 
 
-  module.exports = AutocompleteDirectionsHandler;
+  module.exports = AutoCompleteDirectionsHandler;
