@@ -8,7 +8,7 @@ var routeSelected = function(evt) {
 function initMap() {
   var map = new google.maps.Map(document.getElementById('main-map'), {
     mapTypeControl: false,
-    center: {lat: -33.8688, lng: 151.2195},
+    center: {lat: 55.9470, lng: -3.2020},
     zoom: 13
   });
 
