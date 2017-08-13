@@ -27,9 +27,14 @@ entry.post('/routes', function(req, res) {
 entry.get('/routes', function(req, res){
   db.collection('routes').find().toArray(function(err, results){
     res.json(results);
-  })
+  });
 })
 
+entry.post('/delete', function(req, res){
+  db.collection('routes').remove({}, function(err, result){
+    res.redirect('/');
+  });
+})
 
 MongoClient.connect('mongodb://localhost:27017/weekend_router', function(err, database) {
   
