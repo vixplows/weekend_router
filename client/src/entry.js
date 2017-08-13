@@ -20,7 +20,7 @@ var routeSelected = function(evt) {
     "start": startInput.ID,
     "end": endInput.ID,
     "mode": modeSelector.mode,
-    "complete": false
+    "status": false
   };
 
   var request = new XMLHttpRequest();

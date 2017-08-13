@@ -7,11 +7,21 @@ PopulateRoutesList.prototype.render = function (routes) {
 
   routes.forEach(function(route){
     var ul = document.createElement('ul');
-    var li = document.createElement('li');
-    li.innerText = route.name;
+    ul.classList.add('saved-routes-list');
+    var nameLi = document.createElement('li');
+    var statusButton = document.createElement('button');
+    nameLi.innerText = route.name;
+
+    if (route.status === true) {
+      statusButton.innerText = "Done";
+    }
+    else {
+      statusButton.innerText = "To be done";
+    }
 
     div.appendChild(ul);
-    ul.appendChild(li);
+    ul.appendChild(nameLi);
+    ul.appendChild(statusButton);
   });
 };
 
