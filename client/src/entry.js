@@ -20,8 +20,9 @@ var routeSelected = function(evt) {
   request.setRequestHeader('Content-Type', 'application/json')
   request.send(JSON.stringify(routeObject))
 
-  // console.log(startInput.ID);
-  // console.log(endInput.ID);
+  console.log(startInput.ID);
+  console.log(endInput.ID);
+  console.log(routeObject);
 }
 
 function initMap() {

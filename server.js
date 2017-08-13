@@ -24,6 +24,11 @@ entry.post('/routes', function(req, res) {
   // console.log("hello")
 });
 
+entry.get('/routes', function(req, res){
+  db.collection('routes').find().toArray(function(err, results){
+    res.json(results);
+  })
+})
 
 
 MongoClient.connect('mongodb://localhost:27017/weekend_router', function(err, database) {
