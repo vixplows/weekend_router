@@ -35,7 +35,6 @@ AutoCompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) 
     me.travelMode = mode;
     me.route();
     modeSelector.mode = mode;
-    // console.log(modeSelector.mode)
   });
 };
 
