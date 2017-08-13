@@ -1,6 +1,11 @@
 var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js')
+
 var routeSelected = function(evt) {
-  console.log("routeSelected");
+  var startInput = document.querySelector("#start-input")
+  var endInput = document.querySelector("#end-input")
+
+  console.log(startInput.ID);
+  console.log(endInput.ID);
 }
 
 function initMap() {
@@ -16,8 +21,8 @@ function initMap() {
 var entry = function(){
   initMap();
 
-  var formSubmission = document.querySelector("#submit");
-  formSubmission.addEventListener('click', routeSelected);
+  var saveRoute = document.querySelector("#save-route");
+  saveRoute.addEventListener('click', routeSelected);
 }
 
 window.addEventListener('load', entry);
