@@ -3,9 +3,26 @@ var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js'
 var routeSelected = function(evt) {
   var startInput = document.querySelector("#start-input")
   var endInput = document.querySelector("#end-input")
+  var url = "/routes"
+
+  var routeObject = {
+    "name": "name", 
+    "start": startInput.ID,
+    "end": endInput.ID,
+    "complete": "no"
+  }
+
+  var request = new XMLHttpRequest();
+  request.addEventListener('load', function(){
+    // populateSavedList();
+  })
+  request.open("POST", url)
+  request.setRequestHeader('Content-Type', 'application/json')
+  request.send(JSON.stringify(routeObject))
 
   console.log(startInput.ID);
   console.log(endInput.ID);
+  console.log(routeObject);
 }
 
 function initMap() {
