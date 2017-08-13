@@ -47,6 +47,8 @@ var AutoCompleteDirectionsHandler = function(map) {
       } else {
         me.destinationPlaceId = place.place_id;
       }
+      console.log(me.originPlaceId)
+      console.log(me.destinationPlaceId)
       me.route();
     });
 
