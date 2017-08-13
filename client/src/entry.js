@@ -2,7 +2,10 @@ var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js'
 
 var routeSelected = function(evt) {
   var startInput = document.querySelector("#start-input")
+  var endInput = document.querySelector("#end-input")
+
   console.log(startInput.ID);
+  console.log(endInput.ID);
 }
 
 function initMap() {
