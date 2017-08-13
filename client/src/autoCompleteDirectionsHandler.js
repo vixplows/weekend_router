@@ -1,5 +1,6 @@
 var originInput;
-var destinationInput
+var destinationInput;
+var modeSelector;
 
 var AutoCompleteDirectionsHandler = function(map) {
   this.map = map;
@@ -8,7 +9,7 @@ var AutoCompleteDirectionsHandler = function(map) {
   this.travelMode = 'WALKING';
   originInput = document.getElementById('start-input');
   destinationInput = document.getElementById('end-input');
-  var modeSelector = document.getElementById('mode-selector');
+  modeSelector = document.getElementById('mode-selector');
 
   this.directionsService = new google.maps.DirectionsService;
   this.directionsDisplay = new google.maps.DirectionsRenderer;
@@ -33,6 +34,8 @@ AutoCompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) 
   radioButton.addEventListener('click', function() {
     me.travelMode = mode;
     me.route();
+    modeSelector.mode = mode;
+    // console.log(modeSelector.mode)
   });
 };
 
