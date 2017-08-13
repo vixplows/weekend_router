@@ -13,24 +13,46 @@ PopulateRoutesList.prototype.render = function (routes) {
     var ul = document.createElement('ul');
     ul.classList.add('saved-routes-list');
     var nameLi = document.createElement('li');
-    var statusButton = document.createElement('button');
-
     nameLi.innerText = route.name;
+    ul.appendChild(nameLi);
+
+    var statusButton = document.createElement('label');
+    statusButton.classList.add('switch')
+    ul.appendChild(statusButton);
+
+    var inputOfButton = document.createElement('input');
+    inputOfButton.classList.add('check')
+    inputOfButton.type = 'checkbox'
+    statusButton.appendChild(inputOfButton)
+
+    var span = document.createElement('span');
+    span.classList.add('slider')
+    statusButton.appendChild(span)
+
+    div.appendChild(ul);
+
+    inputOfButton.addEventListener('change', function () {
+      if (route.status === false) {
+
+        route.status = true
+
+      } else if (route.status === true) {
+
+        route.status = false
+
+      }
+    });
 
     if (route.status === true) {
-      statusButton.innerText = "Done";
+      inputOfButton.checked = true;
     }
-    else {
-      statusButton.innerText = "To be done";
-    }
+    else if (route.status === false) {
+      inputOfButton.checked = false;
+    }//toggles button to be checkout or not
 
     statusButton.route = route;
     // console.log(statusButton.ID);
     statusButton.addEventListener('click', changeStatus);
-
-    div.appendChild(ul);
-    ul.appendChild(nameLi);
-    ul.appendChild(statusButton);
   });
 };
 
