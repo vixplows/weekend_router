@@ -17,3 +17,8 @@ body {
 .inputs {
   margin: 10px;
 }
+
+.saved-routes-list {
+  display: inline;
+  list-style-type: none;
+}

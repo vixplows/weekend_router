@@ -2,16 +2,35 @@ var PopulateRoutesList = function(routes){
   this.render(routes);
 };
 
+var changeStatus = function(evt) {
+  console.log(this.route.status);
+};
+
 PopulateRoutesList.prototype.render = function (routes) {
   var div = document.querySelector('#routes-to-do');
 
   routes.forEach(function(route){
     var ul = document.createElement('ul');
-    var li = document.createElement('li');
-    li.innerText = route.name;
+    ul.classList.add('saved-routes-list');
+    var nameLi = document.createElement('li');
+    var statusButton = document.createElement('button');
+
+    nameLi.innerText = route.name;
+
+    if (route.status === true) {
+      statusButton.innerText = "Done";
+    }
+    else {
+      statusButton.innerText = "To be done";
+    }
+
+    statusButton.route = route;
+    // console.log(statusButton.ID);
+    statusButton.addEventListener('click', changeStatus);
 
     div.appendChild(ul);
-    ul.appendChild(li);
+    ul.appendChild(nameLi);
+    ul.appendChild(statusButton);
   });
 };
 
