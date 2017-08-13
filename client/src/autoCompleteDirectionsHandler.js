@@ -34,8 +34,8 @@ AutoCompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) 
   radioButton.addEventListener('click', function() {
     me.travelMode = mode;
     me.route();
-    modeSelector.ID = mode;
-    // console.log(mode)
+    modeSelector.mode = mode;
+    // console.log(modeSelector.mode)
   });
 };
 

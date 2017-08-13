@@ -3,6 +3,9 @@ var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js'
 var routeSelected = function(evt) {
   var startInput = document.querySelector("#start-input")
   var endInput = document.querySelector("#end-input")
+  var modeSelector = document.querySelector("#mode-selector")
+
+  modeSelector.mode = 'WALKING';
 
   var routeName = prompt("Please enter your route name", "Route Name?");
   if (routeName != null) {
@@ -16,6 +19,7 @@ var routeSelected = function(evt) {
     "name": routeName,
     "start": startInput.ID,
     "end": endInput.ID,
+    "mode": modeSelector.mode,
     "complete": false
   }
 
