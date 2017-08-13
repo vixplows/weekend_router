@@ -3,13 +3,20 @@ var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js'
 var routeSelected = function(evt) {
   var startInput = document.querySelector("#start-input")
   var endInput = document.querySelector("#end-input")
+
+  var routeName = prompt("Please enter your route name", "Route Name?");
+  if (routeName != null) {
+      console.log(routeName)
+  }
+
+
   var url = "/routes"
 
   var routeObject = {
-    "name": "name", 
+    "name": routeName,
     "start": startInput.ID,
     "end": endInput.ID,
-    "complete": "no"
+    "complete": false
   }
 
   var request = new XMLHttpRequest();
