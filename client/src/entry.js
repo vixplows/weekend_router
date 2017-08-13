@@ -13,6 +13,13 @@ function initMap() {
   new AutoCompleteDirectionsHandler(map);
 }
 
+function saveRouteIDs(startID, endID) {
+  this.startID = startID;
+  this.endID = endID;
+  console.log(startID);
+  console.log(endID);
+}
+
 var entry = function(){
   initMap();
 
