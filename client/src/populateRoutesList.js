@@ -25,10 +25,12 @@ var changeStatus = function(route) {
 
 PopulateRoutesList.prototype.render = function (routes) {
   var start = document.querySelector('#routes-to-do');
+  start.innerHTML = "";
   var tableTag = document.createElement('table');
   tableTag.classList.add('tableTag')
   var trTag = document.createElement('tr');
   var nameTag = document.createElement('th');
+  nameTag.classList.add('th-name')
   var doneTag = document.createElement('th');
   var notesTag = document.createElement('th');
   var deleteTag = document.createElement('th');
@@ -40,10 +42,10 @@ PopulateRoutesList.prototype.render = function (routes) {
   notesTag.innerText = "Notes"
   deleteTag.innerText = "Remove"
 
+  trTag.appendChild(nameTag)
+  trTag.appendChild(doneTag)
   trTag.appendChild(deleteTag)
   trTag.appendChild(notesTag)
-  trTag.appendChild(doneTag)
-  trTag.appendChild(nameTag)
   tableTag.appendChild(trTag)
   start.appendChild(tableTag)
 
@@ -58,11 +60,12 @@ PopulateRoutesList.prototype.render = function (routes) {
     tr.classList.add('saved-list-item');
     var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
+    nameLi.classList.add('th-name')
     //add what switch does for user
 
-    var thForSwitch = document.createElement('th');
+    // var thForSwitch = document.createElement('th');
 
-    var statusButton = document.createElement('button');
+    var statusButton = document.createElement('label');
     statusButton.classList.add('switch');
     var inputOfButton = document.createElement('input');
     inputOfButton.classList.add('check');
@@ -73,6 +76,7 @@ PopulateRoutesList.prototype.render = function (routes) {
 
     var deleteById = document.createElement('th');
     deleteById.innerText = 'X';
+    deleteById.classList.add('remove-x')
     deleteById.addEventListener('click', function(){
       makeDeleteRequest(route._id, requestComplete);
     });
@@ -80,8 +84,9 @@ PopulateRoutesList.prototype.render = function (routes) {
     tr.appendChild(nameLi);
     statusButton.appendChild(inputOfButton);
     statusButton.appendChild(span);
-    thForSwitch.appendChild(statusButton);
-    tr.appendChild(thForSwitch)
+    tr.appendChild(statusButton)
+    // thForSwitch.appendChild(statusButton);
+    // tr.appendChild(thForSwitch)
     tr.appendChild(deleteById);
     tableTag.appendChild(tr);
       // </tr>

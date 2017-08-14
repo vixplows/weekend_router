@@ -8,7 +8,7 @@
   <script src='bundle.js'></script>
 </head>
 <body>
-  <div>
+  <div class="window">
     <h1 id="header">Weekend Router</h1>
     <div class="inputs">
       <input id="start-input" type="text" name="start" placeholder="Start"></input>
@@ -24,25 +24,13 @@
       </div>
       <button id="save-route" type="button">Save Route</button>
     </div>
-
-    <div id='main-map'></div>
-
-    <div>
-      <h2>Saved Routes</h2>
-      <div id="routes-to-do">
-
+      <div class="feature">
+        <div id='main-map'></div>
+        <div class="saved-routes">
+          <h2>Saved Routes</h2>
+          <div id="routes-to-do">
+        </div>
       </div>
-      <!-- <table>
-        <tr>
-          <th>Route</th>
-          <th>Done?</th>
-          <th>Notes</th>
-          <th>Remove</th>
-        </tr>
-      </table> -->
-      <!-- <div id="routes-to-do"> -->
-
-      <!-- </div> -->
     </div>
   </div>
 </body>
