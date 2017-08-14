@@ -11,7 +11,7 @@ var routeSelected = function(evt, callback) {
   var routeName = prompt("Please enter your route name", "Route Name?");
   if (routeName === null) {
     routeName = "Route";
-  }
+  };
 
   var url = "/routes";
 
@@ -55,7 +55,7 @@ function initMap() {
     zoom: 13
   });
   new AutoCompleteDirectionsHandler(map);
-}
+};
 
 var entry = function(){
   initMap();
@@ -65,8 +65,7 @@ var entry = function(){
   var saveRoute = document.querySelector("#save-route");
   saveRoute.addEventListener('click', function() {
     routeSelected(this.responseText, requestComplete);
-    console.log(this.responseText);
-  }); // trying to get response here?
+  });
 };
 
 window.addEventListener('load', entry);

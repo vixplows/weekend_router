@@ -60,7 +60,7 @@ PopulateRoutesList.prototype.render = function (routes) {
 
         route.status = false;
         changeStatus(route);
-      }
+      };
     });
 
     if (route.status === true) {
@@ -68,7 +68,7 @@ PopulateRoutesList.prototype.render = function (routes) {
     }
     else if (route.status === false) {
       inputOfButton.checked = false;
-    }//toggles button to be checkout or not
+    };//toggles button to be checkout or not
 
     var deleteById = document.createElement('button');
     deleteById.innerText = 'X';

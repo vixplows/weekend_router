@@ -17,7 +17,6 @@ entry.post('/routes', function(req, res) {
   db.collection('routes').save(req.body, function(err, result){
     db.collection('routes').find().toArray(function(err, results){
       res.json(results);
-      console.log(results);
     });
   });
 });
@@ -39,7 +38,7 @@ entry.post('/delete/:id', function(req, res){
 
 entry.post('/delete', function(req, res){
   db.collection('routes').remove({}, function(err, result){
-    res.redirect('/')
+    res.redirect('/');
   });
 });
 
