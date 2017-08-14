@@ -2,8 +2,6 @@ var PopulateRoutesList = function(routes){
   this.render(routes);
 };
 
-///
-
 var makeDeleteRequest = function (id, callback) {
   var url = "/delete/"+ id;
   var routesRequest = new XMLHttpRequest();
@@ -14,16 +12,12 @@ var makeDeleteRequest = function (id, callback) {
   routesRequest.send();
 };
 
-
 var requestComplete = function () {
   if(this.status !== 200) return;
-  console.log(this.responseText);
   var routesString = this.responseText;
   var freshRoutes = JSON.parse(routesString);
-  new PopulateRoutesList(freshRoutes);//note: for dynamic list load
+  new PopulateRoutesList(freshRoutes);
 };
-
-///
 
 var changeStatus = function(route) {
   console.log(route.status);
@@ -77,9 +71,9 @@ PopulateRoutesList.prototype.render = function (routes) {
     }//toggles button to be checkout or not
 
     var deleteById = document.createElement('button');
+    deleteById.innerText = 'X';
     deleteById.addEventListener('click', function(){
       makeDeleteRequest(route._id, requestComplete);
-      console.log(route._id);
     });
     ul.appendChild(deleteById);
   });
