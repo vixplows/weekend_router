@@ -3,7 +3,6 @@ var parser = require('body-parser');
 var entry = express();
 var path = require('path');
 
-// var mongodb = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var db;
@@ -30,21 +29,7 @@ entry.get('/routes', function(req, res){
   db.collection('routes').find().toArray(function(err, results){
     res.json(results);
   });
-})
-
-// entry.get('/delete', function(req, res, next) {
-//   var id = req.query.id;
-//
-//   db.collection('routes', function(err, routes) {
-//     routes.deleteOne({_id: new MongoClient.ObjectID(id)});
-//     if (err){
-//       throw err;
-//     }else{
-//       res.redirect('/');
-//      }
-//   });
-//
-// });
+});
 
 entry.delete('/delete/:id', function(req, res){
   var id = req.params.id;
@@ -53,13 +38,11 @@ entry.delete('/delete/:id', function(req, res){
   });
 });
 
-
-
 entry.post('/delete', function(req, res){
   db.collection('routes').remove({}, function(err, result){
     res.redirect('/');
   });
-})
+});
 
 MongoClient.connect('mongodb://localhost:27017/weekend_router', function(err, database) {
 
