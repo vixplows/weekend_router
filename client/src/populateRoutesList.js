@@ -51,6 +51,17 @@ PopulateRoutesList.prototype.render = function (routes) {
     statusButton.appendChild(span);
     div.appendChild(ul);
 
+    // adding in an eventlistener so that when the savedRouteName is clicked it calls the showSelectedRoute function passing in the places ids and travel mode
+    nameLi.addEventListener('click', function() {
+      var originPlaceId = route.start;
+      var destinationPlaceId = route.end;
+      var travelMode = route.mode;
+      console.log(originPlaceId);
+      console.log(destinationPlaceId);
+      console.log(travelMode)
+    });
+    //
+
     inputOfButton.addEventListener('change', function () {//html = checkbox
       if (route.status === false) {
 

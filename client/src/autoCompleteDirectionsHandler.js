@@ -77,6 +77,26 @@ AutoCompleteDirectionsHandler.prototype.route = function() {
     }
   });
 
+// function to take place ids and travel mode from selected savedRoute and to popualte map with route based on it -> rework code below in line with this
+
+// AutoCompleteDirectionsHandler.prototype.showSelectedRoute = function(originPlaceId, destinationPlaceId, travelMode) {
+//   if (!this.originPlaceId || !this.destinationPlaceId) {
+//     return;
+//   }
+//   var me = this;
+
+//   this.directionsService.route({
+//     origin: {'placeId': this.originPlaceId},
+//     destination: {'placeId': this.destinationPlaceId},
+//     travelMode: this.travelMode
+//   }, function(response, status) {
+//     if (status === 'OK') {
+//       me.directionsDisplay.setDirections(response);
+//     } else {
+//       window.alert('Directions request failed due to ' + status);
+//     }
+//   });
+
 }
 
 
