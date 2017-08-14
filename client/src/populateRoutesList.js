@@ -19,9 +19,27 @@ var requestComplete = function () {
   new PopulateRoutesList(freshRoutes);
 };
 
-var changeStatus = function(route) {
-  console.log(route.status);
+///
+
+var changeStatus = function(route, callback) {
+  console.log(route._id);
+  var id = route._id;
+
+  var url = "/routes/" + id;
+  var changeStatusRequest = new XMLHttpRequest();
+
+  changeStatusRequest.open("PUT", url);
+  changeStatusRequest.setRequestHeader('Content-Type', 'application/json');
+  // changeStatusRequest.addEventListener('load', callback);
+  changeStatusRequest.send();
 };
+
+///
+
+//
+// var populateMapWithSelectedSavedRoute = function(start, end, mode) {
+
+// };
 
 PopulateRoutesList.prototype.render = function (routes) {
   var div = document.querySelector('#routes-to-do');
@@ -51,16 +69,15 @@ PopulateRoutesList.prototype.render = function (routes) {
     statusButton.appendChild(span);
     div.appendChild(ul);
 
-    // adding in an eventlistener so that when the savedRouteName is clicked it calls the showSelectedRoute function passing in the places ids and travel mode
+    //  ///////
     nameLi.addEventListener('click', function() {
-      var originPlaceId = route.start;
-      var destinationPlaceId = route.end;
-      var travelMode = route.mode;
-      console.log(originPlaceId);
-      console.log(destinationPlaceId);
-      console.log(travelMode)
+      console.log("Route start: " + route.start)
+      console.log("Route end: " + route.end)
+      console.log("Route.mode: " + route.mode)
+
+
     });
-    //
+    //  ///////
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
       if (route.status === false) {

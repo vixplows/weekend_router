@@ -27,6 +27,35 @@ entry.get('/routes', function(req, res){
   });
 });
 
+///
+entry.put('/routes/:id', function(req, res){
+  var id = req.params.id;
+  // var status = route.status
+
+  // console.log("status in put" + route.status) 
+
+  db.collection('routes').update({'_id': new ObjectID(id)} , {
+    $set: {
+      status: "something"
+    }
+  });
+});
+
+// db.books.update(
+//    { _id: 1 },
+//    {
+//      $inc: { stock: 5 },
+//      $set: {
+//        item: "ABC123",
+//        "info.publisher": "2222",
+//        tags: [ "software" ],
+//        "ratings.1": { by: "xyz", rating: 3 }
+//      }
+//    }
+// )
+
+///
+
 entry.post('/delete/:id', function(req, res){
   var id = req.params.id;
   db.collection('routes').deleteOne({'_id': new ObjectID(id)},function(err, result){
