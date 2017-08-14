@@ -30,6 +30,11 @@ entry.get('/routes', function(req, res){
 ///
 entry.put('/routes/:id', function(req, res){
   var id = req.params.id;
+
+  db.collection('routes').find({'_id': new ObjectID(id)}).toArray(function(err, result){
+    res.json(result);
+    console.log(result)
+  });
   // var status = route.status
 
   // console.log("status in put" + route.status) 
