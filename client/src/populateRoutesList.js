@@ -19,29 +19,29 @@ PopulateRoutesList.prototype.render = function (routes) {
     //add what switch does for user
 
     var statusButton = document.createElement('label');
-    statusButton.classList.add('switch')
+    statusButton.classList.add('switch');
     ul.appendChild(statusButton);
 
     var inputOfButton = document.createElement('input');
-    inputOfButton.classList.add('check')
-    inputOfButton.type = 'checkbox'
-    statusButton.appendChild(inputOfButton)
+    inputOfButton.classList.add('check');
+    inputOfButton.type = 'checkbox';
+    statusButton.appendChild(inputOfButton);
 
     var span = document.createElement('span');
-    span.classList.add('slider')
-    statusButton.appendChild(span)
+    span.classList.add('slider');
+    statusButton.appendChild(span);
 
     div.appendChild(ul);
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
       if (route.status === false) {
 
-        route.status = true
-        changeStatus(route)
+        route.status = true;
+        changeStatus(route);
       } else if (route.status === true) {
 
-        route.status = false
-        changeStatus(route)
+        route.status = false;
+        changeStatus(route);
       }
     });
 
