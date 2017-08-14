@@ -39,6 +39,20 @@ var makeRequest = function (callback) {
   routesRequest.send();
 };
 
+///
+
+// var makeDeleteRequest = function (id, callback) {
+//   var url = "/delete/"+ id;
+//   var routesRequest = new XMLHttpRequest();
+//
+//   routesRequest.open("DELETE", url);
+//   routesRequest.setRequestHeader('Content-Type', 'application/json');
+//   routesRequest.addEventListener('load', callback);
+//   routesRequest.send();
+// };
+
+///
+
 var requestComplete = function () {
   if(this.status !== 200) return;
 

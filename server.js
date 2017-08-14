@@ -33,8 +33,8 @@ entry.get('/routes', function(req, res){
 
 entry.delete('/delete/:id', function(req, res){
   var id = req.params.id;
-  db.collection('routes').deleteOne({'_id': new ObjectID(id)},function(result) {
-    return res.send(result);
+  db.collection('routes').deleteOne({'_id': new ObjectID(id)},function(){
+    res.redirect('/');//redirect not working
   });
 });
 
