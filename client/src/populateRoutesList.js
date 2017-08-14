@@ -51,6 +51,12 @@ PopulateRoutesList.prototype.render = function (routes) {
     else if (route.status === false) {
       inputOfButton.checked = false;
     }//toggles button to be checkout or not
+
+    var deleteById = document.createElement('button');
+    deleteById.addEventListener('click', function(){
+      console.log(route._id)
+    })
+    ul.appendChild(deleteById)
   });
 };
 
