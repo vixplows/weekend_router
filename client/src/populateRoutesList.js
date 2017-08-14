@@ -8,19 +8,19 @@ var makeDeleteRequest = function (id, callback) {
   var url = "/delete/"+ id;
   var routesRequest = new XMLHttpRequest();
 
-  routesRequest.open("DELETE", url);
+  routesRequest.open("POST", url);
   routesRequest.setRequestHeader('Content-Type', 'application/json');
   routesRequest.addEventListener('load', callback);
   routesRequest.send();
 };
-  // makeDeleteRequest(route._id, completeRequest);
+
 
 var requestComplete = function () {
   if(this.status !== 200) return;
-
-  // var routesString = this.responseText;
-  // var routes = JSON.parse(routesString);
-  // new PopulateRoutesList(routes);//note: for dynamic list load 
+  console.log(this.responseText);
+  var routesString = this.responseText;
+  var freshRoutes = JSON.parse(routesString);
+  new PopulateRoutesList(freshRoutes);//note: for dynamic list load
 };
 
 ///
@@ -31,6 +31,7 @@ var changeStatus = function(route) {
 
 PopulateRoutesList.prototype.render = function (routes) {
   var div = document.querySelector('#routes-to-do');
+  div.innerHTML = "";
 
   routes.forEach(function(route){
     var ul = document.createElement('ul');
@@ -78,7 +79,7 @@ PopulateRoutesList.prototype.render = function (routes) {
     var deleteById = document.createElement('button');
     deleteById.addEventListener('click', function(){
       makeDeleteRequest(route._id, requestComplete);
-      console.log(route._id)
+      console.log(route._id);
     });
     ul.appendChild(deleteById);
   });

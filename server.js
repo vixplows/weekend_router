@@ -13,9 +13,10 @@ entry.use(express.static('client/build'));
 entry.use(express.static('client/public'));
 
 
-entry.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
+// entry.get('/', function (req, res) {
+//   console.log("Hello im alive");
+//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
+// });
 
 entry.post('/routes', function(req, res) {
   db.collection('routes').save(req.body, function(err, result){
@@ -31,10 +32,12 @@ entry.get('/routes', function(req, res){
   });
 });
 
-entry.delete('/delete/:id', function(req, res){
+entry.post('/delete/:id', function(req, res){
   var id = req.params.id;
-  db.collection('routes').deleteOne({'_id': new ObjectID(id)},function(){
-    res.redirect('/');//redirect not working
+  db.collection('routes').deleteOne({'_id': new ObjectID(id)},function(err, result){
+    db.collection('routes').find().toArray(function(err, results){
+      res.json(results);
+    });
   });
 });
 
