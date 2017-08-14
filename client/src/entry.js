@@ -8,7 +8,14 @@ var routeSelected = function(evt, callback) {
 
   modeSelector.mode = 'WALKING';
 
-  var routeName = prompt("Please enter your route name", "Route Name?");
+  var routeName = prompt("Please enter your route name", "");
+
+
+  if(routeName == '')
+  {
+    return;
+  }; 
+
   if (routeName === null) {
     routeName = "Route";
   };
