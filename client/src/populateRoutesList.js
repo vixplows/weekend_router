@@ -2,12 +2,36 @@ var PopulateRoutesList = function(routes){
   this.render(routes);
 };
 
+///
+
+var makeDeleteRequest = function (id, callback) {
+  var url = "/delete/"+ id;
+  var routesRequest = new XMLHttpRequest();
+
+  routesRequest.open("POST", url);
+  routesRequest.setRequestHeader('Content-Type', 'application/json');
+  routesRequest.addEventListener('load', callback);
+  routesRequest.send();
+};
+
+
+var requestComplete = function () {
+  if(this.status !== 200) return;
+  console.log(this.responseText);
+  var routesString = this.responseText;
+  var freshRoutes = JSON.parse(routesString);
+  new PopulateRoutesList(freshRoutes);//note: for dynamic list load
+};
+
+///
+
 var changeStatus = function(route) {
   console.log(route.status);
 };
 
 PopulateRoutesList.prototype.render = function (routes) {
   var div = document.querySelector('#routes-to-do');
+  div.innerHTML = "";
 
   routes.forEach(function(route){
     var ul = document.createElement('ul');
@@ -51,6 +75,13 @@ PopulateRoutesList.prototype.render = function (routes) {
     else if (route.status === false) {
       inputOfButton.checked = false;
     }//toggles button to be checkout or not
+
+    var deleteById = document.createElement('button');
+    deleteById.addEventListener('click', function(){
+      makeDeleteRequest(route._id, requestComplete);
+      console.log(route._id);
+    });
+    ul.appendChild(deleteById);
   });
 };
 
