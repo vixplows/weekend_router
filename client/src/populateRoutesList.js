@@ -19,7 +19,7 @@ var requestComplete = function () {
   new PopulateRoutesList(freshRoutes);
 };
 
-///
+/// Added in put request to persist change to status to document in db to true and stays as changed status when refresh page - but doesn't work for turning back to false yet!
 
 var changeStatus = function(route, callback) {
   console.log(route._id);
@@ -30,16 +30,11 @@ var changeStatus = function(route, callback) {
 
   changeStatusRequest.open("PUT", url);
   changeStatusRequest.setRequestHeader('Content-Type', 'application/json');
-  // changeStatusRequest.addEventListener('load', callback);
+  changeStatusRequest.addEventListener('load', callback); // is this needed?
   changeStatusRequest.send();
 };
 
 ///
-
-//
-// var populateMapWithSelectedSavedRoute = function(start, end, mode) {
-
-// };
 
 PopulateRoutesList.prototype.render = function (routes) {
   var div = document.querySelector('#routes-to-do');
@@ -69,15 +64,29 @@ PopulateRoutesList.prototype.render = function (routes) {
     statusButton.appendChild(span);
     div.appendChild(ul);
 
-    //  ///////
+    /// Added in event listener so that when user clicks on route name ultimately that route will show in map
     nameLi.addEventListener('click', function() {
-      console.log("Route start: " + route.start)
-      console.log("Route end: " + route.end)
-      console.log("Route.mode: " + route.mode)
+      console.log("OrginPlaceId: " + route.start)
+      console.log("DestinationPlaceId: " + route.end)
+      console.log("TraveMode: " + route.mode)
 
+      // when clicked it should:
+      // take start and end points (place ids? might need lat and lngs) and the travel mode and give to a route directions object/function to then display on map
+
+      var map = new google.maps.Map(document.getElementById('main-map'), {
+        mapTypeControl: false,
+        center: {lat: 53.8, lng: -1.54},
+        zoom: 13
+      });
+
+      // directionsService.route({
+      //   origin: {'placeId': route.start},
+      //   destination: {'placeId': route.end},
+      //   travelMode: route.mode
+      // });
 
     });
-    //  ///////
+    // /
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
       if (route.status === false) {

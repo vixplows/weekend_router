@@ -27,37 +27,17 @@ entry.get('/routes', function(req, res){
   });
 });
 
-///
+/// Put request to persist change from false to true when toggle switched - currently only hardcoded to persist change in status to 'true' - how make dynamic so can change from true to false and vice versa?
+
 entry.put('/routes/:id', function(req, res){
   var id = req.params.id;
 
-  db.collection('routes').find({'_id': new ObjectID(id)}).toArray(function(err, result){
-    res.json(result);
-    console.log(result)
-  });
-  // var status = route.status
-
-  // console.log("status in put" + route.status) 
-
   db.collection('routes').update({'_id': new ObjectID(id)} , {
-    $set: {
-      status: "something"
-    }
+      $set: {
+        status: true
+      }
   });
 });
-
-// db.books.update(
-//    { _id: 1 },
-//    {
-//      $inc: { stock: 5 },
-//      $set: {
-//        item: "ABC123",
-//        "info.publisher": "2222",
-//        tags: [ "software" ],
-//        "ratings.1": { by: "xyz", rating: 3 }
-//      }
-//    }
-// )
 
 ///
 
