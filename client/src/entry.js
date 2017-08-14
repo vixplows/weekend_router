@@ -1,7 +1,7 @@
 var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
 var PopulateRoutesList = require('./PopulateRoutesList');
 
-var routeSelected = function(evt) {
+var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
@@ -11,7 +11,7 @@ var routeSelected = function(evt) {
   var routeName = prompt("Please enter your route name", "Route Name?");
   if (routeName === null) {
     routeName = "Route";
-  }
+  };
 
   var url = "/routes";
 
@@ -26,8 +26,9 @@ var routeSelected = function(evt) {
   var request = new XMLHttpRequest();
   request.open("POST", url);
   request.setRequestHeader('Content-Type', 'application/json');
+  request.addEventListener('load', callback);
   request.send(JSON.stringify(routeObject));
-}
+};
 
 var makeRequest = function (callback) {
   var url = "/routes";
@@ -38,20 +39,6 @@ var makeRequest = function (callback) {
   routesRequest.addEventListener('load', callback);
   routesRequest.send();
 };
-
-///
-
-// var makeDeleteRequest = function (id, callback) {
-//   var url = "/delete/"+ id;
-//   var routesRequest = new XMLHttpRequest();
-//
-//   routesRequest.open("DELETE", url);
-//   routesRequest.setRequestHeader('Content-Type', 'application/json');
-//   routesRequest.addEventListener('load', callback);
-//   routesRequest.send();
-// };
-
-///
 
 var requestComplete = function () {
   if(this.status !== 200) return;
@@ -68,7 +55,7 @@ function initMap() {
     zoom: 13
   });
   new AutoCompleteDirectionsHandler(map);
-}
+};
 
 var entry = function(){
   initMap();
@@ -76,7 +63,9 @@ var entry = function(){
   makeRequest(requestComplete);
 
   var saveRoute = document.querySelector("#save-route");
-  saveRoute.addEventListener('click', routeSelected);
-}
+  saveRoute.addEventListener('click', function() {
+    routeSelected(this.responseText, requestComplete);
+  });
+};
 
 window.addEventListener('load', entry);

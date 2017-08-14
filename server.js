@@ -13,17 +13,12 @@ entry.use(express.static('client/build'));
 entry.use(express.static('client/public'));
 
 
-// entry.get('/', function (req, res) {
-//   console.log("Hello im alive");
-//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
-// });
-
 entry.post('/routes', function(req, res) {
   db.collection('routes').save(req.body, function(err, result){
-    res.json(result);
+    db.collection('routes').find().toArray(function(err, results){
+      res.json(results);
+    });
   });
-  // res.redirect('/');
-  // console.log("hello")
 });
 
 entry.get('/routes', function(req, res){
