@@ -10,7 +10,7 @@ var routeSelected = function(evt, callback) {
 
   var routeName = prompt("Please enter your route name", "Route Name?");
   if (routeName === null) {
-    routeName = "Route";
+    return;
   };
 
   var url = "/routes";
