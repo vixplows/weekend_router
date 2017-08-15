@@ -1,6 +1,6 @@
 body {
   background-color: lightgrey;
-  color: black;
+  color: white;
   font-family: courier;
   /*max-width: 700px;*/
 }
@@ -34,6 +34,7 @@ body {
   float: left;
   height:400px;
   width:400px;
+  color: black;
 /*  border-radius: 10px;*/
 }
 
@@ -140,3 +141,5 @@ input:checked + .slider:before {
   color: darkcyan;
 }
 /* Tables! */
+
+
