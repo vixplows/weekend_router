@@ -6,7 +6,11 @@ var routeSelected = function(evt, callback) {
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
 
-  modeSelector.mode = 'WALKING';
+  console.log("before: " + modeSelector.mode)
+  if (!modeSelector.mode) {
+    modeSelector.mode = 'WALKING';
+  }
+  console.log("after: " + modeSelector.mode)
 
   var routeName;
   var proceed = false;

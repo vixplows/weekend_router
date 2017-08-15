@@ -71,9 +71,8 @@ PopulateRoutesList.prototype.render = function (routes) {
   tableTag.appendChild(trTag)
   start.appendChild(tableTag)
 
-
-
   // var Starttr = document.querySelector('#routes-to-do');
+
   var Starttr = document.createElement('tr');
   Starttr.innerHTML = "";
   trTag.appendChild(Starttr)
@@ -135,34 +134,31 @@ PopulateRoutesList.prototype.render = function (routes) {
 
     /// Added in event listener so that when user clicks on route name ultimately that route will show in map
     nameLi.addEventListener('click', function() {
-      console.log("OrginPlaceId: " + route.start)
-      console.log("DestinationPlaceId: " + route.end)
-      console.log("TraveMode: " + route.mode)
-
-      // when clicked it should:
-      // take start and end points (place ids? might need lat and lngs) and the travel mode and give to a route directions object/function to then display on map
-
-      // hard coded to test that map changes when a route name is clicked - if attach lat lng to nameLi element then could access dynamically here but would still need a way of setting both start and end, travel mode and route
       var map = new google.maps.Map(document.getElementById('main-map'), {
         mapTypeControl: false,
         center: {lat: 53.8, lng: -1.54},
         zoom: 13
       });
+      var reDraw = new AutoCompleteDirectionsHandler(map);
+      reDraw.originPlaceId = route.start;
+      reDraw.destinationPlaceId = route.end;
+      reDraw.travelMode = route.mode;
+      reDraw.route();
     });
-    // /
 
-    inputOfButton.addEventListener('change', function () {//html = checkbox
-      route.status++;
-      changeStatus(route);
-    });
+  inputOfButton.addEventListener('change', function () {//html = checkbox
+    route.status++;
+    changeStatus(route);
 
-    if (route.status %2 === 0) {
-      inputOfButton.checked = true;
-    }
-    else if (route.status %2 !== 0) {
-      inputOfButton.checked = false;
-    };//toggles button to be checkout or not
   });
+
+  if (route.status %2 === 0) {
+    inputOfButton.checked = true;
+  }
+  else if (route.status %2 !== 0) {
+    inputOfButton.checked = false;
+  };//toggles button to be checkout or not
+});
 };
 
 module.exports = PopulateRoutesList;
