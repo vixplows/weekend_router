@@ -5,8 +5,6 @@ var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
-  
-  modeSelector.mode = 'WALKING';
 
   var routeName;
   var proceed = false;
