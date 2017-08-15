@@ -27,19 +27,15 @@ entry.get('/routes', function(req, res){
   });
 });
 
-/// Put request to persist change from false to true when toggle switched - currently only hardcoded to persist change in status to 'true' - how make dynamic so can change from true to false and vice versa?
-
 entry.put('/routes/:id', function(req, res){
   var id = req.params.id;
 
   db.collection('routes').update({'_id': new ObjectID(id)} , {
-      $set: {
-        status: true
+      $inc: {
+        status: 1
       }
   });
 });
-
-///
 
 entry.post('/delete/:id', function(req, res){
   var id = req.params.id;

@@ -19,8 +19,6 @@ var requestComplete = function () {
   new PopulateRoutesList(freshRoutes);
 };
 
-/// Added in put request to persist change to status to document in db to true and stays as changed status when refresh page - but doesn't work for turning back to false yet!
-
 var changeStatus = function(route, callback) {
   console.log(route._id);
   var id = route._id;
@@ -30,11 +28,9 @@ var changeStatus = function(route, callback) {
 
   changeStatusRequest.open("PUT", url);
   changeStatusRequest.setRequestHeader('Content-Type', 'application/json');
-  changeStatusRequest.addEventListener('load', callback); // is this needed?
+  changeStatusRequest.addEventListener('load', callback);
   changeStatusRequest.send();
 };
-
-///
 
 PopulateRoutesList.prototype.render = function (routes) {
   var div = document.querySelector('#routes-to-do');
@@ -90,21 +86,15 @@ PopulateRoutesList.prototype.render = function (routes) {
     // /
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
-      if (route.status === false) {
+      route.status++;
+      changeStatus(route);
 
-        route.status = true;
-        changeStatus(route);
-      } else if (route.status === true) {
-
-        route.status = false;
-        changeStatus(route);
-      };
     });
 
-    if (route.status === true) {
+    if (route.status %2 === 0) {
       inputOfButton.checked = true;
     }
-    else if (route.status === false) {
+    else if (route.status %2 !== 0) {
       inputOfButton.checked = false;
     };//toggles button to be checkout or not
 
