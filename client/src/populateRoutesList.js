@@ -4,6 +4,17 @@ var PopulateRoutesList = function(routes){
   this.render(routes);
 };
 
+
+
+
+// function myFunction() {
+//     var person = prompt("Add note");
+//     if (person != null) {
+//         document.getElementById("demo").innerHTML =
+//         person;
+//     }
+// }
+
 var makeDeleteRequest = function (id, callback) {
   var url = "/delete/"+ id;
   var routesRequest = new XMLHttpRequest();
@@ -60,6 +71,8 @@ PopulateRoutesList.prototype.render = function (routes) {
   tableTag.appendChild(trTag)
   start.appendChild(tableTag)
 
+  // var Starttr = document.querySelector('#routes-to-do');
+
   var Starttr = document.createElement('tr');
   Starttr.innerHTML = "";
   trTag.appendChild(Starttr)
@@ -97,13 +110,27 @@ PopulateRoutesList.prototype.render = function (routes) {
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
     tr.appendChild(deleteById);
+
+    var notes = document.createElement('th');
+    notes.classList.add('notes')
+    notes.addEventListener('click', function() {
+
+      var note = prompt("Add note");
+      if (note === null) {
+        notes.innerHTML = note;
+      } else if (note !== null) {
+        prompt(note)
+      }
+      // if (note != null) {
+      //   prompt(note)
+      // } else if {
+      //   notes.innerHTML = note;
+      // }
+
+    })
+
+    tr.appendChild(notes);
     tableTag.appendChild(tr);
-      // </tr>
-      // <div id="routes-to-do">
-
-
-      // </div>
-    // </table>
 
     /// Added in event listener so that when user clicks on route name ultimately that route will show in map
     nameLi.addEventListener('click', function() {
