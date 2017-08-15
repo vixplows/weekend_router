@@ -46,7 +46,7 @@ input[type=text] {
 }
 
 #save-route {
-  float: right;
+ /* float: right;*/
   margin-top: 8px;
   padding: 8px 10px;
   border: none;
