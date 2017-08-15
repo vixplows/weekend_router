@@ -10,9 +10,34 @@ body {
 }
 
 #main-map {
-  height:600px;
-  width:600px;
+  height:400px;
+  width:400px;
+/*  border-radius: 10px;*/
 }
+
+input[type=text] {
+    width: 280px;
+    padding: 8px 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 10px;
+
+ 
+}
+
+#save-route {
+  float: right;
+
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+
+
+
+}
+
 
 .inputs {
   margin: 10px;
