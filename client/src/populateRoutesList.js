@@ -24,32 +24,77 @@ var changeStatus = function(route) {
 };
 
 PopulateRoutesList.prototype.render = function (routes) {
-  var div = document.querySelector('#routes-to-do');
-  div.innerHTML = "";
+  var start = document.querySelector('#routes-to-do');
+  start.innerHTML = "";
+  var tableTag = document.createElement('table');
+  tableTag.classList.add('tableTag')
+  var trTag = document.createElement('tr');
+  var nameTag = document.createElement('th');
+  nameTag.classList.add('th-name')
+  var doneTag = document.createElement('th');
+  var notesTag = document.createElement('th');
+  var deleteTag = document.createElement('th');
+
+  trTag.classList.add('saved-list');
+
+  nameTag.innerText = "Route"
+  doneTag.innerText = "Done?"
+  notesTag.innerText = "Notes"
+  deleteTag.innerText = "Remove"
+
+  trTag.appendChild(nameTag)
+  trTag.appendChild(doneTag)
+  trTag.appendChild(deleteTag)
+  trTag.appendChild(notesTag)
+  tableTag.appendChild(trTag)
+  start.appendChild(tableTag)
+
+
+  // var Starttr = document.querySelector('#routes-to-do');
+  var Starttr = document.createElement('tr');
+  Starttr.innerHTML = "";
+  trTag.appendChild(Starttr)
 
   routes.forEach(function(route){
-    var ul = document.createElement('ul');
-    ul.classList.add('saved-routes-list');
-    var nameLi = document.createElement('li');
+    var tr = document.createElement('tr');
+    tr.classList.add('saved-list-item');
+    var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
-
+    nameLi.classList.add('th-name')
     //add what switch does for user
+
+    // var thForSwitch = document.createElement('th');
 
     var statusButton = document.createElement('label');
     statusButton.classList.add('switch');
-
     var inputOfButton = document.createElement('input');
     inputOfButton.classList.add('check');
     inputOfButton.type = 'checkbox';
-
     var span = document.createElement('span');
     span.classList.add('slider');
 
-    ul.appendChild(nameLi);
-    ul.appendChild(statusButton);
+
+    var deleteById = document.createElement('th');
+    deleteById.innerText = 'X';
+    deleteById.classList.add('remove-x')
+    deleteById.addEventListener('click', function(){
+      makeDeleteRequest(route._id, requestComplete);
+    });
+
+    tr.appendChild(nameLi);
     statusButton.appendChild(inputOfButton);
     statusButton.appendChild(span);
-    div.appendChild(ul);
+    tr.appendChild(statusButton)
+    // thForSwitch.appendChild(statusButton);
+    // tr.appendChild(thForSwitch)
+    tr.appendChild(deleteById);
+    tableTag.appendChild(tr);
+      // </tr>
+      // <div id="routes-to-do">
+
+
+      // </div>
+    // </table>
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
       if (route.status === false) {
@@ -69,13 +114,6 @@ PopulateRoutesList.prototype.render = function (routes) {
     else if (route.status === false) {
       inputOfButton.checked = false;
     };//toggles button to be checkout or not
-
-    var deleteById = document.createElement('button');
-    deleteById.innerText = 'X';
-    deleteById.addEventListener('click', function(){
-      makeDeleteRequest(route._id, requestComplete);
-    });
-    ul.appendChild(deleteById);
   });
 };
 

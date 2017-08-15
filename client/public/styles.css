@@ -2,14 +2,36 @@ body {
   background-color: #333;
   color: white;
   font-family: courier;
-  max-width: 700px;
+  /*max-width: 700px;*/
 }
 
 #header {
   text-decoration: underline;
 }
 
+.feature {
+  float: left;
+}
+
+.saved-list {
+  border-bottom: 2px solid red;
+}/* not currentlly working even when showing in the browser */
+
+.saved-list-item {
+  border-bottom: 1px solid orange;
+}/* not currentlly working even when showing in the browser */
+
+.saved-routes{
+  float: left;
+  margin: 10px;
+}
+
+.saved-routes h2  {
+    margin: 0;
+}
+
 #main-map {
+  float: left;
   height:400px;
   width:400px;
 /*  border-radius: 10px;*/
@@ -21,21 +43,15 @@ input[type=text] {
     margin: 8px 0;
     border: none;
     border-radius: 10px;
-
- 
 }
 
 #save-route {
   float: right;
-
   margin-top: 8px;
   padding: 8px 10px;
   border: none;
   border-radius: 10px;
   background-color: white;
-
-
-
 }
 
 
@@ -47,13 +63,22 @@ input[type=text] {
   display: inline;
   list-style-type: none;
 }
+
+.th-name {
+  text-align: left;
+}
+
+.remove-x {
+  color: red;
+}
+
 /*---------------------------------------*/
  /*The switch - the box around the slider*/
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 24px;
 }
 
 /* Hide default HTML checkbox */
@@ -69,7 +94,7 @@ input[type=text] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  /*background-color: #ccc;*/
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -77,17 +102,22 @@ input[type=text] {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: orange;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
+/*.slider:after {
+
+}*/
+
 input:checked + .slider {
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
+  background-color: orange;
 }
 
 input:focus + .slider {
@@ -95,9 +125,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
+  -webkit-transform: translateX(36px);
   -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  transform: translateX(36px);
 }
 
 /* Rounded sliders */
@@ -107,4 +137,6 @@ input:checked + .slider:before {
 
 .slider:before {
   border-radius: 50%;
+  color: darkcyan;
 }
+/* Tables! */
