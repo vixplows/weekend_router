@@ -55,6 +55,7 @@ AutoCompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
     me.route();
     originInput.ID = me.originPlaceId;
     destinationInput.ID = me.destinationPlaceId;
+    console.log(me)
   });
 
 };

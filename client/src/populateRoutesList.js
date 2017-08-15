@@ -117,12 +117,17 @@ PopulateRoutesList.prototype.render = function (routes) {
       // take start and end points (place ids? might need lat and lngs) and the travel mode and give to a route directions object/function to then display on map
 
       // hard coded to test that map changes when a route name is clicked - if attach lat lng to nameLi element then could access dynamically here but would still need a way of setting both start and end, travel mode and route
-      var map = new google.maps.Map(document.getElementById('main-map'), {
-        mapTypeControl: false,
-        center: {lat: 53.8, lng: -1.54},
-        zoom: 13
-      });
+    var map = new google.maps.Map(document.getElementById('main-map'), {
+      mapTypeControl: false,
+      center: {lat: 53.8, lng: -1.54},
+      zoom: 13
     });
+    var reDraw = new AutoCompleteDirectionsHandler(map);
+    reDraw.originPlaceId = route.start;
+    reDraw.destinationPlaceId = route.end;
+    reDraw.travelMode = route.mode;
+    reDraw.route();
+  });
     // /
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
