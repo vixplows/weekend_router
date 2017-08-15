@@ -1,8 +1,12 @@
 body {
-  background-color: lightgrey;
-  color: white;
-  font-family: courier;
+  background-color: #92998d;
+  color: #f5f1e6;
+  font-family: arial;
   /*max-width: 700px;*/
+}
+
+h2 {
+  padding: 8px 10px;
 }
 
 #header {
@@ -42,6 +46,7 @@ body {
   float: left;
   height:400px;
   width:400px;
+  margin-top: 8px;
 /*  border-radius: 10px;*/
 }
 
@@ -56,6 +61,7 @@ input[type=text] {
 #save-route {
  /* float: right;*/
   margin-top: 8px;
+  margin-bottom: 8px;
   padding: 8px 10px;
   border: none;
   border-radius: 10px;
@@ -77,7 +83,7 @@ input[type=text] {
 }
 
 .remove-x {
-  color: red;
+  color: #511515;
 }
 
 /*---------------------------------------*/
@@ -114,18 +120,20 @@ input[type=text] {
   width: 20px;
   left: 2px;
   bottom: 2px;
-  background-color: orange;
+  background-color: #f8c967;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
-/*.slider:after {
-
-}*/
+.slider:after {
+  content: "YES";
+  color: orange;
+  font-size: 12px;
+}
 
 input:checked + .slider {
   /*background-color: #2196F3;*/
-  background-color: orange;
+  background-color: #f5f1e6;
 }
 
 input:focus + .slider {
@@ -140,15 +148,37 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider {
+  float: center;
   border-radius: 34px;
 }
 
 .slider:before {
   border-radius: 50%;
-  color: darkcyan;
+ /* color: darkcyan;*/
 }
 /* Tables! */
 
 #directions {
   float: left;
+}
+
+table {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: grey;
 }
