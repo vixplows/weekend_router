@@ -30,6 +30,14 @@ body {
     margin: 0;
 }
 
+.notes {
+  max-width: 30px;
+/* max-height: 40px; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 #main-map {
   float: left;
   height:400px;
