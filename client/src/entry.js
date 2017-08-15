@@ -11,7 +11,7 @@ var displayPubs = function() {
   var infowindow;
 
 // function initMap() {
-  console.log('I have arrived')
+  
 
     var codeclan = {lat: 55.9470 , lng: -3.2020};
 
@@ -46,7 +46,9 @@ var displayPubs = function() {
 
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(place.name);
+      console.log(place.name);
       infowindow.open(map, this);
+
     });
   }
 }
