@@ -27,6 +27,16 @@ entry.get('/routes', function(req, res){
   });
 });
 
+entry.put('/routes/:id', function(req, res){
+  var id = req.params.id;
+
+  db.collection('routes').update({'_id': new ObjectID(id)} , {
+      $inc: {
+        status: 1
+      }
+  });
+});
+
 entry.post('/delete/:id', function(req, res){
   var id = req.params.id;
   db.collection('routes').deleteOne({'_id': new ObjectID(id)},function(err, result){

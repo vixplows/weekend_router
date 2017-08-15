@@ -1,3 +1,5 @@
+var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
+
 var PopulateRoutesList = function(routes){
   this.render(routes);
 };
@@ -19,8 +21,17 @@ var requestComplete = function () {
   new PopulateRoutesList(freshRoutes);
 };
 
-var changeStatus = function(route) {
-  console.log(route.status);
+var changeStatus = function(route, callback) {
+  console.log(route._id);
+  var id = route._id;
+
+  var url = "/routes/" + id;
+  var changeStatusRequest = new XMLHttpRequest();
+
+  changeStatusRequest.open("PUT", url);
+  changeStatusRequest.setRequestHeader('Content-Type', 'application/json');
+  changeStatusRequest.addEventListener('load', callback);
+  changeStatusRequest.send();
 };
 
 PopulateRoutesList.prototype.render = function (routes) {
@@ -96,22 +107,34 @@ PopulateRoutesList.prototype.render = function (routes) {
       // </div>
     // </table>
 
+    /// Added in event listener so that when user clicks on route name ultimately that route will show in map
+    nameLi.addEventListener('click', function() {
+      console.log("OrginPlaceId: " + route.start)
+      console.log("DestinationPlaceId: " + route.end)
+      console.log("TraveMode: " + route.mode)
+
+      // when clicked it should:
+      // take start and end points (place ids? might need lat and lngs) and the travel mode and give to a route directions object/function to then display on map
+
+      // hard coded to test that map changes when a route name is clicked - if attach lat lng to nameLi element then could access dynamically here but would still need a way of setting both start and end, travel mode and route
+      var map = new google.maps.Map(document.getElementById('main-map'), {
+        mapTypeControl: false,
+        center: {lat: 53.8, lng: -1.54},
+        zoom: 13
+      });
+    });
+    // /
+
     inputOfButton.addEventListener('change', function () {//html = checkbox
-      if (route.status === false) {
+      route.status++;
+      changeStatus(route);
 
-        route.status = true;
-        changeStatus(route);
-      } else if (route.status === true) {
-
-        route.status = false;
-        changeStatus(route);
-      };
     });
 
-    if (route.status === true) {
+    if (route.status %2 === 0) {
       inputOfButton.checked = true;
     }
-    else if (route.status === false) {
+    else if (route.status %2 !== 0) {
       inputOfButton.checked = false;
     };//toggles button to be checkout or not
   });

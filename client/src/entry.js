@@ -35,7 +35,7 @@ var routeSelected = function(evt, callback) {
     "start": startInput.ID,
     "end": endInput.ID,
     "mode": modeSelector.mode,
-    "status": false
+    "status": 1
   };
 
   var request = new XMLHttpRequest();

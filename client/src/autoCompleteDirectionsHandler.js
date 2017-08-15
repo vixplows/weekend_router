@@ -76,8 +76,6 @@ AutoCompleteDirectionsHandler.prototype.route = function() {
       window.alert('Directions request failed due to ' + status);
     }
   });
-
 }
-
 
 module.exports = AutoCompleteDirectionsHandler;
