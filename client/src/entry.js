@@ -8,9 +8,24 @@ var routeSelected = function(evt, callback) {
 
   modeSelector.mode = 'WALKING';
 
-  var routeName = prompt("Please enter your route name", "Route Name?");
-  if (routeName === null) {
-    routeName = "Route";
+  var routeName;
+  var proceed = false;
+  while(!proceed) {
+    routeName = prompt("Please enter your route:");
+    if (typeof(routeName) == "string") {
+      routeName = routeName.trim();  
+      if (routeName=="") {
+        proceed = false;
+        alert('Please enter a route name to proceed');
+      } else {
+        proceed=true;
+      };
+    };
+    if (routeName===null) {
+      proceed = false;
+      alert('Route not saved');
+      return;
+    };
   };
 
   var url = "/routes";
