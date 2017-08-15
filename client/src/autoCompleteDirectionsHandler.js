@@ -14,6 +14,10 @@ var AutoCompleteDirectionsHandler = function(map) {
   this.directionsService = new google.maps.DirectionsService;
   this.directionsDisplay = new google.maps.DirectionsRenderer;
   this.directionsDisplay.setMap(map);
+  var directionsPanel = document.getElementById('directions');
+  directionsPanel.innerHTML = "";
+  this.directionsDisplay.setPanel(directionsPanel);
+
 
   var originAutocomplete = new google.maps.places.Autocomplete(
     originInput, {placeIdOnly: true});

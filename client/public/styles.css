@@ -1,5 +1,5 @@
 body {
-  background-color: #333;
+  background-color: lightgrey;
   color: white;
   font-family: courier;
   /*max-width: 700px;*/
@@ -140,3 +140,7 @@ input:checked + .slider:before {
   color: darkcyan;
 }
 /* Tables! */
+
+#directions {
+  float: left;
+}
