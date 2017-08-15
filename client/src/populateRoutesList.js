@@ -4,17 +4,6 @@ var PopulateRoutesList = function(routes){
   this.render(routes);
 };
 
-
-
-
-// function myFunction() {
-//     var person = prompt("Add note");
-//     if (person != null) {
-//         document.getElementById("demo").innerHTML =
-//         person;
-//     }
-// }
-
 var makeDeleteRequest = function (id, callback) {
   var url = "/delete/"+ id;
   var routesRequest = new XMLHttpRequest();
@@ -36,7 +25,7 @@ var changeStatus = function(route, callback) {
   console.log(route._id);
   var id = route._id;
 
-  var url = "/routes/" + id;
+  var url = "/routes/" + id + "/status";
   var changeStatusRequest = new XMLHttpRequest();
 
   changeStatusRequest.open("PUT", url);
@@ -44,6 +33,21 @@ var changeStatus = function(route, callback) {
   changeStatusRequest.addEventListener('load', callback);
   changeStatusRequest.send();
 };
+
+var saveNotes = function(route, callback) {
+  var id = route._id;
+  var notes = route.notes.innerHTML
+  // console.log(notes);
+
+  var url = "/routes/" + id + "/" + notes;
+  var changeNotesRequest = new XMLHttpRequest();
+
+  changeNotesRequest.open("PUT", url);
+  changeNotesRequest.setRequestHeader('Content-Type', 'application/json');
+  changeNotesRequest.addEventListener('load', callback);
+  changeNotesRequest.send();
+}
+
 
 PopulateRoutesList.prototype.render = function (routes) {
   var start = document.querySelector('#routes-to-do');
@@ -111,26 +115,7 @@ PopulateRoutesList.prototype.render = function (routes) {
     // tr.appendChild(thForSwitch)
     tr.appendChild(deleteById);
 
-    var notes = document.createElement('th');
-    notes.classList.add('notes')
-    notes.addEventListener('click', function() {
 
-      var note = prompt("Add note");
-      if (note === null) {
-        notes.innerHTML = note;
-      } else if (note !== null) {
-        prompt(note)
-      }
-      // if (note != null) {
-      //   prompt(note)
-      // } else if {
-      //   notes.innerHTML = note;
-      // }
-
-    })
-
-    tr.appendChild(notes);
-    tableTag.appendChild(tr);
 
     /// Added in event listener so that when user clicks on route name ultimately that route will show in map
     nameLi.addEventListener('click', function() {
@@ -144,21 +129,37 @@ PopulateRoutesList.prototype.render = function (routes) {
       reDraw.destinationPlaceId = route.end;
       reDraw.travelMode = route.mode;
       reDraw.route();
+
     });
 
-  inputOfButton.addEventListener('change', function () {//html = checkbox
-    route.status++;
-    changeStatus(route);
+    inputOfButton.addEventListener('change', function () {//html = checkbox
+      route.status++;
+      changeStatus(route);
+    });
 
+    if (route.status %2 === 0) {
+      inputOfButton.checked = true;
+    }
+    else if (route.status %2 !== 0) {
+      inputOfButton.checked = false;
+    };//toggles button to be checkout or not
+
+    var notes = document.createElement('th');
+    notes.classList.add('notes')
+    notes.addEventListener('click', function() {
+      var note = prompt("Please enter your note", "Welcome to your note");
+      if (note != null) {
+        notes.innerHTML = "Note: " + note ;
+      }
+      // console.log(route);
+      route.notes = notes
+      saveNotes(route)
+    })//where does the GET request Populate the notes?
+
+
+    tr.appendChild(notes);
+    tableTag.appendChild(tr);
   });
-
-  if (route.status %2 === 0) {
-    inputOfButton.checked = true;
-  }
-  else if (route.status %2 !== 0) {
-    inputOfButton.checked = false;
-  };//toggles button to be checkout or not
-});
 };
 
 module.exports = PopulateRoutesList;

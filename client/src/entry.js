@@ -5,6 +5,8 @@ var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
+  var noteSelector = document.querySelector(".notes");
+  // console.log(noteSelector.notes);//not here?
 
   console.log("before: " + modeSelector.mode)
   if (!modeSelector.mode) {
@@ -17,7 +19,7 @@ var routeSelected = function(evt, callback) {
   while(!proceed) {
     routeName = prompt("Please enter your route:");
     if (typeof(routeName) == "string") {
-      routeName = routeName.trim();  
+      routeName = routeName.trim();
       if (routeName=="") {
         proceed = false;
         alert('Please enter a route name to proceed');
@@ -39,7 +41,8 @@ var routeSelected = function(evt, callback) {
     "start": startInput.ID,
     "end": endInput.ID,
     "mode": modeSelector.mode,
-    "status": 1
+    "status": 1,
+    "notes": ""
   };
 
   var request = new XMLHttpRequest();
