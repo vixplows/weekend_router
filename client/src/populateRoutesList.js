@@ -1,3 +1,5 @@
+var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
+
 var PopulateRoutesList = function(routes){
   this.render(routes);
 };
@@ -75,13 +77,6 @@ PopulateRoutesList.prototype.render = function (routes) {
         center: {lat: 53.8, lng: -1.54},
         zoom: 13
       });
-
-      // directionsService.route({
-      //   origin: {'placeId': route.start},
-      //   destination: {'placeId': route.end},
-      //   travelMode: route.mode
-      // });
-
     });
     // /
 
