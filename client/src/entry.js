@@ -125,7 +125,8 @@ function fetchResult(service, request, delay, last) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
-      position: place.geometry.location
+      position: place.geometry.location,
+      icon: '/images/bar.png'
     });
 
     google.maps.event.addListener(marker, 'click', function() {
