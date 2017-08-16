@@ -47,11 +47,11 @@ PopulateRoutesList.prototype.render = function (routes) {
   deleteTag.innerText = "REMOVE"
   notesTag.innerText = "NOTES"
 
-  trTag.appendChild(nameTag);
-  trTag.appendChild(doneTag);
-  trTag.appendChild(deleteTag);
-  trTag.appendChild(notesTag);
-  tableTag.appendChild(trTag);
+  // trTag.appendChild(nameTag);
+  // trTag.appendChild(doneTag);
+  // trTag.appendChild(notesTag);
+  // trTag.appendChild(deleteTag);
+  // tableTag.appendChild(trTag);
   start.appendChild(tableTag);
 
   // var Starttr = document.querySelector('#routes-to-do');
@@ -63,6 +63,7 @@ PopulateRoutesList.prototype.render = function (routes) {
   routes.forEach(function(route){
     var tr = document.createElement('tr');
     tr.classList.add('saved-list-item');
+    tr.id = "hit-this"
     var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
     nameLi.classList.add('th-name');
@@ -92,11 +93,9 @@ PopulateRoutesList.prototype.render = function (routes) {
     tr.appendChild(statusButton);
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
-    tr.appendChild(deleteById);
 
 
 
-    /// Added in event listener so that when user clicks on route name ultimately that route will show in map
     nameLi.addEventListener('click', function() {
       var map = new google.maps.Map(document.getElementById('main-map'), {
         mapTypeControl: false,
@@ -107,6 +106,7 @@ PopulateRoutesList.prototype.render = function (routes) {
       reDraw.originPlaceId = route.start;
       reDraw.destinationPlaceId = route.end;
       reDraw.travelMode = route.mode;
+      reDraw.reDraw = true;
       reDraw.route();
 
     });
