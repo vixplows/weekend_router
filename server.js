@@ -30,7 +30,7 @@ entry.get('/routes', function(req, res){
 entry.put('/routes/:id', function(req, res){
   var id = req.params.id;
 
-  db.collection('routes').update({'_id': new ObjectID(id)} , {
+  db.collection('routes').update({'_id': new ObjectID(id)}, {
       $inc: {
         status: 1
       }

@@ -96,7 +96,9 @@ PopulateRoutesList.prototype.render = function (routes) {
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
 
+
     var notes = document.createElement('th');
+
     notes.id = 'notes';
     notes.innerText = (route.notes) ? route.notes : "";
     notes.addEventListener('click', function() {
@@ -108,7 +110,6 @@ PopulateRoutesList.prototype.render = function (routes) {
       route.notes = notes;
       route.type = "notes";
       makeRequest(route)
-
     });
 
     tr.appendChild(notes);
