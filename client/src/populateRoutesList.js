@@ -1,11 +1,16 @@
 var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
+var makeRequest = require('./request.js');
 
-var PopulateRoutesList = function(routes){
+var PopulateRoutesList = function(routes, requestFunctions){
   this.render(routes);
 };
 
-
-
+var requestComplete = function () {
+  if(this.status !== 200) return;
+  var routesString = this.responseText;
+  var routes = JSON.parse(routesString);
+  new PopulateRoutesList(routes);
+};
 
 // function myFunction() {
 //     var person = prompt("Add note");
@@ -15,44 +20,14 @@ var PopulateRoutesList = function(routes){
 //     }
 // }
 
-var makeDeleteRequest = function (id, callback) {
-  var url = "/delete/"+ id;
-  var routesRequest = new XMLHttpRequest();
-
-  routesRequest.open("POST", url);
-  routesRequest.setRequestHeader('Content-Type', 'application/json');
-  routesRequest.addEventListener('load', callback);
-  routesRequest.send();
-};
-
-var requestComplete = function () {
-  if(this.status !== 200) return;
-  var routesString = this.responseText;
-  var freshRoutes = JSON.parse(routesString);
-  new PopulateRoutesList(freshRoutes);
-};
-
-var changeStatus = function(route, callback) {
-  console.log(route._id);
-  var id = route._id;
-
-  var url = "/routes/" + id;
-  var changeStatusRequest = new XMLHttpRequest();
-
-  changeStatusRequest.open("PUT", url);
-  changeStatusRequest.setRequestHeader('Content-Type', 'application/json');
-  changeStatusRequest.addEventListener('load', callback);
-  changeStatusRequest.send();
-};
-
 PopulateRoutesList.prototype.render = function (routes) {
   var start = document.querySelector('#routes-to-do');
   start.innerHTML = "";
   var tableTag = document.createElement('table');
-  tableTag.classList.add('tableTag')
+  tableTag.classList.add('tableTag');
   var trTag = document.createElement('tr');
   var nameTag = document.createElement('th');
-  nameTag.classList.add('th-name')
+  nameTag.classList.add('th-name');
   var doneTag = document.createElement('th');
   var notesTag = document.createElement('th');
   var deleteTag = document.createElement('th');
@@ -65,25 +40,25 @@ PopulateRoutesList.prototype.render = function (routes) {
   deleteTag.innerText = "REMOVE"
   notesTag.innerText = "NOTES"
 
-  trTag.appendChild(nameTag)
-  trTag.appendChild(doneTag)
-  trTag.appendChild(deleteTag)
-  trTag.appendChild(notesTag)
-  tableTag.appendChild(trTag)
-  start.appendChild(tableTag)
+  trTag.appendChild(nameTag);
+  trTag.appendChild(doneTag);
+  trTag.appendChild(deleteTag);
+  trTag.appendChild(notesTag);
+  tableTag.appendChild(trTag);
+  start.appendChild(tableTag);
 
   // var Starttr = document.querySelector('#routes-to-do');
 
   var Starttr = document.createElement('tr');
   Starttr.innerHTML = "";
-  trTag.appendChild(Starttr)
+  trTag.appendChild(Starttr);
 
   routes.forEach(function(route){
     var tr = document.createElement('tr');
     tr.classList.add('saved-list-item');
     var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
-    nameLi.classList.add('th-name')
+    nameLi.classList.add('th-name');
     //add what switch does for user
 
     // var thForSwitch = document.createElement('th');
@@ -96,39 +71,37 @@ PopulateRoutesList.prototype.render = function (routes) {
     var span = document.createElement('span');
     span.classList.add('slider');
 
-
     var deleteById = document.createElement('th');
     deleteById.innerText = 'X';
-    deleteById.classList.add('remove-x')
+    deleteById.classList.add('remove-x');
     deleteById.addEventListener('click', function(){
-      makeDeleteRequest(route._id, requestComplete);
+      route.type = "del";
+      makeRequest(route, requestComplete);
     });
 
     tr.appendChild(nameLi);
     statusButton.appendChild(inputOfButton);
     statusButton.appendChild(span);
-    tr.appendChild(statusButton)
+    tr.appendChild(statusButton);
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
     tr.appendChild(deleteById);
 
     var notes = document.createElement('th');
-    notes.classList.add('notes')
+    notes.classList.add('notes');
     notes.addEventListener('click', function() {
-
       var note = prompt("Add note");
       if (note === null) {
         notes.innerHTML = note;
       } else if (note !== null) {
         prompt(note)
-      }
+      };
       // if (note != null) {
       //   prompt(note)
       // } else if {
       //   notes.innerHTML = note;
       // }
-
-    })
+    });
 
     tr.appendChild(notes);
     tableTag.appendChild(tr);
@@ -147,19 +120,19 @@ PopulateRoutesList.prototype.render = function (routes) {
       reDraw.route();
     });
 
-  inputOfButton.addEventListener('change', function () {//html = checkbox
-    route.status++;
-    changeStatus(route);
+    inputOfButton.addEventListener('change', function () {//html = checkbox
+      route.status++;
+      route.type = "status";
+      makeRequest(route);
+    });
 
+    if (route.status %2 === 0) {
+      inputOfButton.checked = true;
+    }
+    else if (route.status %2 !== 0) {
+      inputOfButton.checked = false;
+    };//toggles button to be checkout or not
   });
-
-  if (route.status %2 === 0) {
-    inputOfButton.checked = true;
-  }
-  else if (route.status %2 !== 0) {
-    inputOfButton.checked = false;
-  };//toggles button to be checkout or not
-});
 };
 
 module.exports = PopulateRoutesList;
