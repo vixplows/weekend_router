@@ -87,21 +87,21 @@ PopulateRoutesList.prototype.render = function (routes) {
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
 
+
     var notes = document.createElement('th');
-    notes.id = 'notes';
+    notes.id = 'notes'
+    notes.innerText = (route.notes) ? route.notes : "";
     notes.addEventListener('click', function() {
-      var note = prompt("Add note");
-      if (note === null) {
+      var message = (route.notes) ? route.notes : ""
+      var note = prompt( message + " Please enter your note", " update message");
+      if (note != null) {
         notes.innerHTML = note;
-      } else if (note !== null) {
-        prompt(note)
-      };
-      // if (note != null) {
-      //   prompt(note)
-      // } else if {
-      //   notes.innerHTML = note;
-      // }
-    });
+      }
+      // console.log(route);
+      route.notes = notes;
+      route.type = "notes";
+      makeRequest(route);
+    })//where does the GET request Populate the notes?
 
     tr.appendChild(notes);
     tr.appendChild(deleteById);
