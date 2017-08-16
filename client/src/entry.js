@@ -116,9 +116,20 @@ directionsService.route({
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      // console.log(place.name);
-      infowindow.open(map, this);
+
+      detailsService = new google.maps.places.PlacesService(map);
+
+      var request = {
+        placeId: place.place_id
+      }
+
+      detailsService.getDetails(request, function(placeDetails, status) {
+        var infoWindow = new google.maps.InfoWindow({
+          content: placeDetails.name
+        })
+
+        infoWindow.open(map, marker);
+      });
     });
   };
 };
