@@ -3,7 +3,7 @@
 var makeRequest = function (options, callback) {
   var url;
   var routesRequest = new XMLHttpRequest();
-
+  var body = null;
   if (options.type === "del") {
     url = "/delete/"+ options._id;
     routesRequest.open("POST", url);
@@ -16,15 +16,21 @@ var makeRequest = function (options, callback) {
     routesRequest.open("GET", url);
   } else if (options.type === "notes") {
     var id = options._id;
+
     var notes = options.notes.innerText;
-    var url = "/routes/" + id;
+
+    body = JSON.stringify({
+      notes: notes
+    });
+
+    var url = "/routes/" + id + '/notes';
     routesRequest.open("PUT", url);
     console.log(notes);
   };
 
   routesRequest.setRequestHeader('Content-Type', 'application/json');
   routesRequest.addEventListener('load', callback);
-  routesRequest.send();
+  routesRequest.send(body);
 };
 
 module.exports = makeRequest;

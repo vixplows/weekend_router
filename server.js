@@ -41,8 +41,10 @@ entry.put('/routes/:id/notes', function(req, res){
   var id = req.params.id;
 
   db.collection('routes').update({'_id': new ObjectID(id)}, {
-    $set: {notes: req.params.notes}
+    $set: {notes: req.body.notes}
   });
+
+  res.json({});
 });
 
 entry.post('/delete/:id', function(req, res){

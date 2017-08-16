@@ -126,10 +126,12 @@ PopulateRoutesList.prototype.render = function (routes) {
 
     var notes = document.createElement('th');
     notes.id = 'notes'
+    notes.innerText = (route.notes) ? route.notes : "";
     notes.addEventListener('click', function() {
-      var note = prompt("Please enter your note", "Welcome to your note");
+      var message = (route.notes) ? route.notes : ""
+      var note = prompt( message + " Please enter your note", " update message");
       if (note != null) {
-        notes.innerHTML = "Note: " + note ;
+        notes.innerHTML = note;
       }
       // console.log(route);
       route.notes = notes;
