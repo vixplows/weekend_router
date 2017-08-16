@@ -14,7 +14,7 @@ var makeRequest = function (options, callback) {
   } else if (options.type === "entry") {
     url = "/routes";
     routesRequest.open("GET", url);
-  }else if (options.type === "notes") {
+  } else if (options.type === "notes") {
     var id = options._id;
 
     var notes = options.notes.innerText;
@@ -23,7 +23,7 @@ var makeRequest = function (options, callback) {
       notes: notes
     });
 
-    var url = "/routes/" + id + '/notes';
+    var url = "/routes/" + id;
     routesRequest.open("PUT", url);
     console.log(notes);
   };
