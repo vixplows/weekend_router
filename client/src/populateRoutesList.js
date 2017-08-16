@@ -37,7 +37,7 @@ var changeStatus = function(route, callback) {
 var saveNotes = function(route, callback) {
   var id = route._id;
   var notes = route.notes.innerHTML
-  // console.log(notes);
+  // console.log(notes);//not working for some reason
 
   var url = "/routes/" + id + "/" + notes;
   var changeNotesRequest = new XMLHttpRequest();
@@ -145,7 +145,7 @@ PopulateRoutesList.prototype.render = function (routes) {
     };//toggles button to be checkout or not
 
     var notes = document.createElement('th');
-    notes.classList.add('notes')
+    notes.id = 'notes'
     notes.addEventListener('click', function() {
       var note = prompt("Please enter your note", "Welcome to your note");
       if (note != null) {

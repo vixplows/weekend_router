@@ -6,12 +6,12 @@ var PopulateRoutesList = require('./PopulateRoutesList');
 
 var displayPubs = function() {
 
-  // var map = new google.maps.Map(document.getElementById('main-map'); 
+  // var map = new google.maps.Map(document.getElementById('main-map');
   var map;
   var infowindow;
 
 // function initMap() {
-  
+
 
     var codeclan = {lat: 55.9470 , lng: -3.2020};
 
@@ -58,14 +58,19 @@ var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
-  var noteSelector = document.querySelector(".notes");
-  // console.log(noteSelector.notes);//not here?
+  var noteSelector = document.querySelector("#notes");
 
-  console.log("before: " + modeSelector.mode)
+
+  console.log("before: " + noteSelector.notes);//not here?
+  if (!noteSelector.notes) {
+    noteSelector.notes = '';
+  }
+
+  // console.log("before: " + modeSelector.mode)
   if (!modeSelector.mode) {
     modeSelector.mode = 'WALKING';
   }
-  console.log("after: " + modeSelector.mode)
+  // console.log("after: " + modeSelector.mode)
 
   var routeName;
   var proceed = false;
@@ -95,7 +100,7 @@ var routeSelected = function(evt, callback) {
     "end": endInput.ID,
     "mode": modeSelector.mode,
     "status": 1,
-    "notes": ""
+    "notes": noteSelector.notes
   };
 
   var request = new XMLHttpRequest();
