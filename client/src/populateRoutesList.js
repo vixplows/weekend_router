@@ -118,6 +118,7 @@ PopulateRoutesList.prototype.render = function (routes) {
       reDraw.originPlaceId = route.start;
       reDraw.destinationPlaceId = route.end;
       reDraw.travelMode = route.mode;
+      reDraw.reDraw = true;
       reDraw.route();
     });
 

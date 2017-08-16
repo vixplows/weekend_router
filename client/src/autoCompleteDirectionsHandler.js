@@ -18,7 +18,6 @@ var AutoCompleteDirectionsHandler = function(map) {
   directionsPanel.innerHTML = "";
   this.directionsDisplay.setPanel(directionsPanel);
 
-
   var originAutocomplete = new google.maps.places.Autocomplete(
     originInput, {placeIdOnly: true});
   var destinationAutocomplete = new google.maps.places.Autocomplete(
@@ -26,7 +25,6 @@ var AutoCompleteDirectionsHandler = function(map) {
 
   this.setupClickListener('changemode-walking', 'WALKING');
   this.setupClickListener('changemode-bicycling', 'BICYCLING');
-
 
   this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
   this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
@@ -73,7 +71,10 @@ AutoCompleteDirectionsHandler.prototype.route = function() {
   } else {
     document.getElementById('changemode-bicycling').checked = true;
   };
-
+  this.map = new google.maps.Map(document.getElementById('main-map'), {
+      zoom: 13
+  });
+  this.directionsDisplay.setMap(this.map);
   this.directionsService.route({
     origin: {'placeId': this.originPlaceId},
     destination: {'placeId': this.destinationPlaceId},
@@ -85,6 +86,10 @@ AutoCompleteDirectionsHandler.prototype.route = function() {
       window.alert('Directions request failed due to ' + status);
     };
   });
+  if (me.reDraw = true) {
+    originInput.ID = me.originPlaceId;
+    destinationInput.ID = me.destinationPlaceId;
+  };
 };
 
 module.exports = AutoCompleteDirectionsHandler;
