@@ -107,7 +107,6 @@ PopulateRoutesList.prototype.render = function (routes) {
     tr.appendChild(deleteById);
     tableTag.appendChild(tr);
 
-    /// Added in event listener so that when user clicks on route name ultimately that route will show in map
     nameLi.addEventListener('click', function() {
       var map = new google.maps.Map(document.getElementById('main-map'), {
         mapTypeControl: false,
