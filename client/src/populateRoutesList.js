@@ -12,19 +12,19 @@ var requestComplete = function () {
   new PopulateRoutesList(freshRoutes);
 };
 
-var saveNotes = function(route, callback) {
-  var id = route._id;
-  var notes = route.notes.innerHTML
-  // console.log(notes);//not working for some reason
-
-  var url = "/routes/" + id + "/" + notes;
-  var changeNotesRequest = new XMLHttpRequest();
-
-  changeNotesRequest.open("PUT", url);
-  changeNotesRequest.setRequestHeader('Content-Type', 'application/json');
-  changeNotesRequest.addEventListener('load', callback);
-  changeNotesRequest.send();
-};
+// var saveNotes = function(route, callback) {
+//   var id = route._id;
+//   var notes = route.notes.innerHTML
+//   // console.log(notes);//not working for some reason
+//
+//   var url = "/routes/" + id + "/" + notes;
+//   var changeNotesRequest = new XMLHttpRequest();
+//
+//   changeNotesRequest.open("PUT", url);
+//   changeNotesRequest.setRequestHeader('Content-Type', 'application/json');
+//   changeNotesRequest.addEventListener('load', callback);
+//   changeNotesRequest.send();
+// };
 
 
 PopulateRoutesList.prototype.render = function (routes) {
@@ -132,8 +132,9 @@ PopulateRoutesList.prototype.render = function (routes) {
         notes.innerHTML = "Note: " + note ;
       }
       // console.log(route);
-      route.notes = notes
-      saveNotes(route)
+      route.notes = notes;
+      route.type = "notes";
+      makeRequest(route);
     })//where does the GET request Populate the notes?
 
 

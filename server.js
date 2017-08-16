@@ -37,14 +37,12 @@ entry.put('/routes/:id/status', function(req, res){
   });
 });
 
-entry.put('/routes/:id/:notes', function(req, res){
+entry.put('/routes/:id/notes', function(req, res){
   var id = req.params.id;
-  // console.log(req.params.notes);
 
   db.collection('routes').update({'_id': new ObjectID(id)}, {
     $set: {notes: req.params.notes}
   });
-  console.log(JSON.parse(res.body));
 });
 
 entry.post('/delete/:id', function(req, res){

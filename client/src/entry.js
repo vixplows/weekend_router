@@ -127,13 +127,8 @@ var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
-  var noteSelector = document.querySelector("#notes");
 
 
-  console.log("before: " + noteSelector.notes);//not here?
-  if (!noteSelector.notes) {
-    noteSelector.notes = '';
-  }
 
   if (!modeSelector.mode) {
     modeSelector.mode = 'WALKING';
@@ -167,7 +162,7 @@ var routeSelected = function(evt, callback) {
     "end": endInput.ID,
     "mode": modeSelector.mode,
     "status": 1,
-    "notes": noteSelector.notes
+    "notes": ""
   };
 
   var request = new XMLHttpRequest();
