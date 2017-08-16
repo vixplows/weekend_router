@@ -61,8 +61,6 @@ AutoCompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(aut
 };
 
 AutoCompleteDirectionsHandler.prototype.route = function() {
-  console.log(this.originPlaceId)
-  console.log(this.destinationPlaceId)
   if (!this.originPlaceId || !this.destinationPlaceId) {
     return;
   };
@@ -73,7 +71,6 @@ AutoCompleteDirectionsHandler.prototype.route = function() {
   } else {
     document.getElementById('changemode-bicycling').checked = true;
   };
-  // console.log(this)
   this.map = new google.maps.Map(document.getElementById('main-map'), {
       zoom: 13
   });
