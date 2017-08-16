@@ -37,7 +37,7 @@ directionsService.route({
       directionsDisplay.setDirections(response);
       var path = response.routes[0].overview_path;
       
-      var distance = 0.01;//km
+      var distance = 0.08;//km
       var boxes = routeBoxer.box(path, distance);
 
       //redraw on each request and remove any prior boxes
@@ -51,7 +51,7 @@ directionsService.route({
 
         var request = {
          bounds: boxes[i],
-         keyword: 'bars'
+         type: ['bar']
         }; 
                
         if((i % 10) == 0){
