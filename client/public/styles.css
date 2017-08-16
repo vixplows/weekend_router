@@ -2,6 +2,8 @@ body {
   background-color: #92998d;
   color: #f5f1e6;
   font-family: arial;
+
+
   /*max-width: 700px;*/
 }
 
@@ -83,6 +85,16 @@ input[type=text] {
   background-color: white;
 }
 
+#show-pubs {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  margin-left: 148px;
+}
+
 
 .inputs {
   margin: 10px;
@@ -98,8 +110,20 @@ input[type=text] {
   width: 125px;
 }
 
-.remove-x {
+#remove-x {
   color: #511515;
+  padding-right: 50px;
+  /*padding-left: 10px*/
+
+}
+
+#h-name {
+  text-align: left;
+  max-width: 80px;
+}
+
+#h-done {
+  text-align: left;
 }
 
 /*---------------------------------------*/
@@ -110,6 +134,7 @@ input[type=text] {
   width: 60px;
   height: 24px;
   margin-top: 4px;
+
 }
 
 /* Hide default HTML checkbox */
@@ -190,6 +215,11 @@ table {
 
 th {
     height: 30px;
+}
+
+#table-headers {
+  text-align: center;
+
 }
 
 .saved-list th, td {
