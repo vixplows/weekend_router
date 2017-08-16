@@ -74,7 +74,7 @@ PopulateRoutesList.prototype.render = function (routes) {
 
     var deleteById = document.createElement('th');
     deleteById.innerText = 'X';
-    deleteById.classList.add('remove-x');
+    deleteById.id = 'remove-x';
     deleteById.addEventListener('click', function(){
       route.type = "del";
       makeRequest(route, requestComplete);
