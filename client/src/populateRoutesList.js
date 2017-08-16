@@ -40,11 +40,11 @@ PopulateRoutesList.prototype.render = function (routes) {
   deleteTag.innerText = "REMOVE"
   notesTag.innerText = "NOTES"
 
-  trTag.appendChild(nameTag);
-  trTag.appendChild(doneTag);
-  trTag.appendChild(notesTag);
-  trTag.appendChild(deleteTag);
-  tableTag.appendChild(trTag);
+  // trTag.appendChild(nameTag);
+  // trTag.appendChild(doneTag);
+  // trTag.appendChild(notesTag);
+  // trTag.appendChild(deleteTag);
+  // tableTag.appendChild(trTag);
   start.appendChild(tableTag);
 
   // var Starttr = document.querySelector('#routes-to-do');
@@ -88,7 +88,7 @@ PopulateRoutesList.prototype.render = function (routes) {
     // tr.appendChild(thForSwitch)
 
     var notes = document.createElement('th');
-    notes.classList.add('notes');
+    notes.id = 'notes';
     notes.addEventListener('click', function() {
       var note = prompt("Add note");
       if (note === null) {
