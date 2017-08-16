@@ -11,23 +11,97 @@ var displayPubs = function() {
   var infowindow;
 
 // function initMap() {
+  var boxpolys = null;
+  var startInput = document.querySelector("#start-input");
+  var endInput = document.querySelector("#end-input");
+  var modeSelector = document.querySelector("#mode-selector");
+
+  var codeclan = {lat: 57.1497 , lng: -2.0943};
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  map = new google.maps.Map(document.getElementById('main-map'), {
+    center: codeclan,
+    zoom: 13
+  });
   
+      //google library added to render boxes to show points along our route
+      var routeBoxer = new RouteBoxer();
 
-    var codeclan = {lat: 55.9470 , lng: -3.2020};
+      //Had to redraw the route again, as lost on binding new data to map, with same start and end points
+      directionsService.route({
+        origin: {'placeId': startInput.ID},
+        destination: {'placeId': endInput.ID},
+        travelMode: 'WALKING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+          var path = response.routes[0].overview_path;
+          
+                    var distance = 0.01;//km
+                    var boxes = routeBoxer.box(path, distance);
 
-    map = new google.maps.Map(document.getElementById('main-map'), {
-      center: codeclan,
-      zoom: 15
+                    //redraw on each request and remove any prior boxes
+                    clearBoxes();
+                    // drawBoxes(boxes);
+                    service = new google.maps.places.PlacesService(map);
+
+                    //foreach box on the 10th box call google API, can only call a max on 20 times...
+                    for (var i = 0; i < boxes.length; i++) {
+                      var bounds = boxes[i];
+
+                      var request = {
+                       bounds: boxes[i],
+                       keyword: 'bars'
+                     };
+                     
+                     if((i % 10) == 0){
+                      console.log(i);
+                      service.radarSearch(request, function(results, status) {
+                        if (status == google.maps.places.PlacesServiceStatus.OK) {
+                          
+                          for (var i = 0, result; result = results[i]; i++) {
+                            var marker = createMarker(result);
+                          }
+                        } 
+
+                        if (status != google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+                          console.log("OVER LIMIT");
+                        } 
+                      });
+                    }
+                  }
+
+                } else {
+                  window.alert('Directions request failed due to ' + status);
+                }
+              });
+
+      directionsDisplay.setMap(map);
+
+//taken from examples where routeboxer was used.
+function drawBoxes(boxes) {
+  boxpolys = new Array(boxes.length);
+  for (var i = 0; i < boxes.length; i++) {
+    boxpolys[i] = new google.maps.Rectangle({
+      bounds: boxes[i],
+      fillOpacity: 0,
+      strokeOpacity: 1.0,
+      strokeColor: '#000000',
+      strokeWeight: 1,
+      map: map
     });
+  }
+}
 
-    infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-      location: codeclan,
-      radius: 500,
-      type: ['bar']
-    }, callback);
-  // }
+  // Clear boxes currently on the map
+  function clearBoxes() {
+    if (boxpolys != null) {
+      for (var i = 0; i < boxpolys.length; i++) {
+        boxpolys[i].setMap(null);
+      }
+    }
+    boxpolys = null;
+  }
 
   function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -46,7 +120,7 @@ var displayPubs = function() {
 
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(place.name);
-      console.log(place.name);
+      // console.log(place.name);
       infowindow.open(map, this);
 
     });
@@ -140,10 +214,10 @@ var entry = function(){
   });
 
 //not sure if should be response text
-  var showPubs = document.querySelector("#show-pubs");
-  showPubs.addEventListener('click', function() {
-    displayPubs();
-  });
+var showPubs = document.querySelector("#show-pubs");
+showPubs.addEventListener('click', function() {
+  displayPubs();
+});
 };
 
 window.addEventListener('load', entry);
