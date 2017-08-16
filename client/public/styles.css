@@ -92,7 +92,7 @@ input[type=text] {
   border: none;
   border-radius: 10px;
   background-color: white;
-  margin-left: 148px;
+  margin-left: 5px;
 }
 
 
@@ -119,7 +119,7 @@ input[type=text] {
 
 #h-name {
   text-align: left;
-  max-width: 80px;
+  max-width: 100px;
 }
 
 #h-done {

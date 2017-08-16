@@ -23,7 +23,7 @@ var makeRequest = function (options, callback) {
       notes: notes
     });
 
-    var url = "/routes/" + id;
+    var url = "/routes/" + id + "/notes";
     routesRequest.open("PUT", url);
     console.log(notes);
   };

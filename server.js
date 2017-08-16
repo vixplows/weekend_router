@@ -37,7 +37,7 @@ entry.put('/routes/:id', function(req, res){
   });
 });
 
-entry.put('/routes/:id', function(req, res){
+entry.put('/routes/:id/notes', function(req, res){
   var id = req.params.id;
 
   db.collection('routes').update({'_id': new ObjectID(id)}, {
