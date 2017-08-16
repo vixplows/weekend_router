@@ -1,143 +1,161 @@
 var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
-var PopulateRoutesList = require('./PopulateRoutesList');
-// var PubFinder = require('./PubFinder');
+var makeRequest = require('./request.js')
+var PopulateRoutesList = require('./populateRoutesList.js');
 
-///
+var requestComplete = function () {
+  if(this.status !== 200) return;
+  var routesString = this.responseText;
+  var routes = JSON.parse(routesString);
+  new PopulateRoutesList(routes);
+};
 
 var displayPubs = function() {
 
-  // var map = new google.maps.Map(document.getElementById('main-map'); 
   var map;
   var infowindow;
 
-// function initMap() {
   var boxpolys = null;
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
 
-  var codeclan = {lat: 57.1497 , lng: -2.0943};
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
   map = new google.maps.Map(document.getElementById('main-map'), {
-    center: codeclan,
     zoom: 13
-  });
+});
   
-      //google library added to render boxes to show points along our route
-      var routeBoxer = new RouteBoxer();
+//google library added to render boxes to show points along our route
+var routeBoxer = new RouteBoxer();
 
-      //Had to redraw the route again, as lost on binding new data to map, with same start and end points
-      directionsService.route({
-        origin: {'placeId': startInput.ID},
-        destination: {'placeId': endInput.ID},
-        travelMode: 'WALKING'
-      }, function(response, status) {
-        if (status === 'OK') {
-          directionsDisplay.setDirections(response);
-          var path = response.routes[0].overview_path;
-          
-                    var distance = 0.01;//km
-                    var boxes = routeBoxer.box(path, distance);
+//Had to redraw the route again, as lost on binding new data to map, with same start and end points
+directionsService.route({
+  origin: {'placeId': startInput.ID},
+  destination: {'placeId': endInput.ID},
+  travelMode: 'WALKING'}, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+      var path = response.routes[0].overview_path;
+      
+      var distance = 0.04;//km
+      var boxes = routeBoxer.box(path, distance);
 
-                    //redraw on each request and remove any prior boxes
-                    clearBoxes();
-                    // drawBoxes(boxes);
-                    service = new google.maps.places.PlacesService(map);
+      //redraw on each request and remove any prior boxes
+      clearBoxes();
+      // drawBoxes(boxes);
+      service = new google.maps.places.PlacesService(map);
 
-                    //foreach box on the 10th box call google API, can only call a max on 20 times...
-                    for (var i = 0; i < boxes.length; i++) {
-                      var bounds = boxes[i];
+      //foreach box on the 10th box call google API, can only call a max on 20 times...
+      for (var i = 0; i < boxes.length; i++) {
+        var bounds = boxes[i];
 
-                      var request = {
-                       bounds: boxes[i],
-                       keyword: 'bars'
-                     };
-                     
-                     if((i % 10) == 0){
-                      console.log(i);
-                      service.radarSearch(request, function(results, status) {
-                        if (status == google.maps.places.PlacesServiceStatus.OK) {
-                          
-                          for (var i = 0, result; result = results[i]; i++) {
-                            var marker = createMarker(result);
-                          }
-                        } 
+        var request = {
+         bounds: boxes[i],
+         type: ['bar']
+        }; 
+               
+        // if((i % 1) == 0){
+        var last = (i === (boxes.length - 1));
+        fetchResult(service, request, i * 225, last);
+      //  }
+      }
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    };
+  });
 
-                        if (status != google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
-                          console.log("OVER LIMIT");
-                        } 
-                      });
-                    }
-                  }
+function fetchResult(service, request, delay, last) {
+  setTimeout(function() {
+    service.radarSearch(request, function(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0, result; result = results[i]; i++) {
+          var marker = createMarker(result);
+        };
+      };
 
-                } else {
-                  window.alert('Directions request failed due to ' + status);
-                }
-              });
+      if (status === google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+        console.log("OVER LIMIT");
+      }else if(status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        console.log("ZERO");
+      }
 
-      directionsDisplay.setMap(map);
-
-//taken from examples where routeboxer was used.
-function drawBoxes(boxes) {
-  boxpolys = new Array(boxes.length);
-  for (var i = 0; i < boxes.length; i++) {
-    boxpolys[i] = new google.maps.Rectangle({
-      bounds: boxes[i],
-      fillOpacity: 0,
-      strokeOpacity: 1.0,
-      strokeColor: '#000000',
-      strokeWeight: 1,
-      map: map
-    });
-  }
+      if(last) {
+        console.log("last item");
+      }
+    });  
+  }, delay);
 }
+
+  directionsDisplay.setMap(map);
+
+  //taken from examples where routeboxer was used.
+  function drawBoxes(boxes) {
+    boxpolys = new Array(boxes.length);
+    for (var i = 0; i < boxes.length; i++) {
+      boxpolys[i] = new google.maps.Rectangle({
+        bounds: boxes[i],
+        fillOpacity: 0,
+        strokeOpacity: 1.0,
+        strokeColor: '#000000',
+        strokeWeight: 1,
+        map: map
+      });
+    };
+  };
 
   // Clear boxes currently on the map
   function clearBoxes() {
     if (boxpolys != null) {
       for (var i = 0; i < boxpolys.length; i++) {
         boxpolys[i].setMap(null);
-      }
-    }
+      };
+    };
     boxpolys = null;
-  }
+  };
 
   function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; i++) {
         createMarker(results[i]);
-      }
-    }
-  }
+      };
+    };
+  };
 
   function createMarker(place) {
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
-      position: place.geometry.location
+      position: place.geometry.location,
+      icon: '/images/bar.png'
     });
 
     google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      // console.log(place.name);
-      infowindow.open(map, this);
 
+      detailsService = new google.maps.places.PlacesService(map);
+
+      var request = {
+        placeId: place.place_id
+      }
+
+      detailsService.getDetails(request, function(placeDetails, status) {
+        var infoWindow = new google.maps.InfoWindow({
+          content: placeDetails.name
+        })
+
+        infoWindow.open(map, marker);
+      });
     });
-  }
-}
-///
+  };
+};
 
 var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
 
-  console.log("before: " + modeSelector.mode)
   if (!modeSelector.mode) {
     modeSelector.mode = 'WALKING';
-  }
-  console.log("after: " + modeSelector.mode)
+  };
 
   var routeName;
   var proceed = false;
@@ -176,24 +194,6 @@ var routeSelected = function(evt, callback) {
   request.send(JSON.stringify(routeObject));
 };
 
-var makeRequest = function (callback) {
-  var url = "/routes";
-  var routesRequest = new XMLHttpRequest();
-
-  routesRequest.open("GET", url);
-  routesRequest.setRequestHeader('Content-Type', 'application/json');
-  routesRequest.addEventListener('load', callback);
-  routesRequest.send();
-};
-
-var requestComplete = function () {
-  if(this.status !== 200) return;
-
-  var routesString = this.responseText;
-  var routes = JSON.parse(routesString);
-  new PopulateRoutesList(routes);
-};
-
 function initMap() {
   var map = new google.maps.Map(document.getElementById('main-map'), {
     mapTypeControl: false,
@@ -206,18 +206,19 @@ function initMap() {
 var entry = function(){
   initMap();
 
-  makeRequest(requestComplete);
-
+  var options = {};
+  options.type = "entry";
+  makeRequest(options, requestComplete);
   var saveRoute = document.querySelector("#save-route");
   saveRoute.addEventListener('click', function() {
     routeSelected(this.responseText, requestComplete);
   });
 
-//not sure if should be response text
-var showPubs = document.querySelector("#show-pubs");
-showPubs.addEventListener('click', function() {
-  displayPubs();
-});
+  //not sure if should be response text
+  var showPubs = document.querySelector("#show-pubs");
+  showPubs.addEventListener('click', function() {
+    displayPubs();
+  });
 };
 
 window.addEventListener('load', entry);

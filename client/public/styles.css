@@ -1,8 +1,12 @@
 body {
-  background-color: lightgrey;
-  color: white;
-  font-family: courier;
+  background-color: #92998d;
+  color: #f5f1e6;
+  font-family: arial;
   /*max-width: 700px;*/
+}
+
+h2 {
+  padding: 8px 10px;
 }
 
 #header {
@@ -18,24 +22,47 @@ body {
 }/* not currentlly working even when showing in the browser */
 
 .saved-list-item {
+  height: 32px;
   border-bottom: 1px solid orange;
 }/* not currentlly working even when showing in the browser */
+
+#hit-this:hover {
+  background-color: grey;
+}
+
+#routes-to-do {
+  overflow-x: scroll;
+  max-height: 355px;
+  white-space: nowrap;
+  flex: none;
+  border: 1px solid #f5f1e6;
+}
 
 .saved-routes{
   float: left;
   margin: 10px;
+  cursor: pointer;
 }
 
 .saved-routes h2  {
     margin: 0;
 }
 
+#notes {
+  width: 125px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+
 #main-map {
   float: left;
   height:400px;
   width:400px;
+  margin-top: 8px;
+  z-index: 100;
+  border-radius: 10px;
   color: black;
-/*  border-radius: 10px;*/
 }
 
 input[type=text] {
@@ -49,6 +76,7 @@ input[type=text] {
 #save-route {
  /* float: right;*/
   margin-top: 8px;
+  margin-bottom: 8px;
   padding: 8px 10px;
   border: none;
   border-radius: 10px;
@@ -67,10 +95,11 @@ input[type=text] {
 
 .th-name {
   text-align: left;
+  width: 125px;
 }
 
 .remove-x {
-  color: red;
+  color: #511515;
 }
 
 /*---------------------------------------*/
@@ -80,6 +109,7 @@ input[type=text] {
   display: inline-block;
   width: 60px;
   height: 24px;
+  margin-top: 4px;
 }
 
 /* Hide default HTML checkbox */
@@ -107,18 +137,22 @@ input[type=text] {
   width: 20px;
   left: 2px;
   bottom: 2px;
-  background-color: orange;
+  background-color: #f8c967;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
-/*.slider:after {
-
-}*/
+.slider:after {
+  content: "yes";
+  padding: 2px;
+  text-align: center;
+  color: orange;
+  font-size: 12px;
+}
 
 input:checked + .slider {
-  /*background-color: #2196F3;*/
-  background-color: orange;
+  background-color: #2196F3;
+  background-color: #f5f1e6;
 }
 
 input:focus + .slider {
@@ -133,13 +167,33 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider {
-  border-radius: 34px;
+  float: center;
+ /* border-radius: 34px;*/
 }
 
 .slider:before {
-  border-radius: 50%;
-  color: darkcyan;
+ /* border-radius: 50%;*/
+ /* color: darkcyan;*/
 }
 /* Tables! */
 
+#directions {
+  float: left;
+}
 
+table {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+.saved-list th, td {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
