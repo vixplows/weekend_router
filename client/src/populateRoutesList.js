@@ -1,17 +1,8 @@
 var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
+var makeRequest = require('./request.js');
 
-var PopulateRoutesList = function(routes){
+var PopulateRoutesList = function(routes, requestFunctions){
   this.render(routes);
-};
-
-var makeDeleteRequest = function (id, callback) {
-  var url = "/delete/"+ id;
-  var routesRequest = new XMLHttpRequest();
-
-  routesRequest.open("POST", url);
-  routesRequest.setRequestHeader('Content-Type', 'application/json');
-  routesRequest.addEventListener('load', callback);
-  routesRequest.send();
 };
 
 var requestComplete = function () {
@@ -19,19 +10,6 @@ var requestComplete = function () {
   var routesString = this.responseText;
   var freshRoutes = JSON.parse(routesString);
   new PopulateRoutesList(freshRoutes);
-};
-
-var changeStatus = function(route, callback) {
-  console.log(route._id);
-  var id = route._id;
-
-  var url = "/routes/" + id + "/status";
-  var changeStatusRequest = new XMLHttpRequest();
-
-  changeStatusRequest.open("PUT", url);
-  changeStatusRequest.setRequestHeader('Content-Type', 'application/json');
-  changeStatusRequest.addEventListener('load', callback);
-  changeStatusRequest.send();
 };
 
 var saveNotes = function(route, callback) {
@@ -46,47 +24,48 @@ var saveNotes = function(route, callback) {
   changeNotesRequest.setRequestHeader('Content-Type', 'application/json');
   changeNotesRequest.addEventListener('load', callback);
   changeNotesRequest.send();
-}
+};
 
 
 PopulateRoutesList.prototype.render = function (routes) {
   var start = document.querySelector('#routes-to-do');
   start.innerHTML = "";
   var tableTag = document.createElement('table');
-  tableTag.classList.add('tableTag')
+  tableTag.classList.add('tableTag');
   var trTag = document.createElement('tr');
   var nameTag = document.createElement('th');
-  nameTag.classList.add('th-name')
+  nameTag.classList.add('th-name');
   var doneTag = document.createElement('th');
   var notesTag = document.createElement('th');
   var deleteTag = document.createElement('th');
 
   trTag.classList.add('saved-list');
 
-  nameTag.innerText = "Route"
-  doneTag.innerText = "Done?"
-  notesTag.innerText = "Notes"
-  deleteTag.innerText = "Remove"
+  nameTag.innerText = "ROUTE NAME"
+  doneTag.innerText = "DONE"
+  // notesTag.innerText = "NOTES"
+  deleteTag.innerText = "REMOVE"
+  notesTag.innerText = "NOTES"
 
-  trTag.appendChild(nameTag)
-  trTag.appendChild(doneTag)
-  trTag.appendChild(deleteTag)
-  trTag.appendChild(notesTag)
-  tableTag.appendChild(trTag)
-  start.appendChild(tableTag)
+  trTag.appendChild(nameTag);
+  trTag.appendChild(doneTag);
+  trTag.appendChild(deleteTag);
+  trTag.appendChild(notesTag);
+  tableTag.appendChild(trTag);
+  start.appendChild(tableTag);
 
   // var Starttr = document.querySelector('#routes-to-do');
 
   var Starttr = document.createElement('tr');
   Starttr.innerHTML = "";
-  trTag.appendChild(Starttr)
+  trTag.appendChild(Starttr);
 
   routes.forEach(function(route){
     var tr = document.createElement('tr');
     tr.classList.add('saved-list-item');
     var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
-    nameLi.classList.add('th-name')
+    nameLi.classList.add('th-name');
     //add what switch does for user
 
     // var thForSwitch = document.createElement('th');
@@ -99,18 +78,18 @@ PopulateRoutesList.prototype.render = function (routes) {
     var span = document.createElement('span');
     span.classList.add('slider');
 
-
     var deleteById = document.createElement('th');
     deleteById.innerText = 'X';
-    deleteById.classList.add('remove-x')
+    deleteById.classList.add('remove-x');
     deleteById.addEventListener('click', function(){
-      makeDeleteRequest(route._id, requestComplete);
+      route.type = "del";
+      makeRequest(route, requestComplete);
     });
 
     tr.appendChild(nameLi);
     statusButton.appendChild(inputOfButton);
     statusButton.appendChild(span);
-    tr.appendChild(statusButton)
+    tr.appendChild(statusButton);
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
     tr.appendChild(deleteById);
@@ -134,7 +113,8 @@ PopulateRoutesList.prototype.render = function (routes) {
 
     inputOfButton.addEventListener('change', function () {//html = checkbox
       route.status++;
-      changeStatus(route);
+      route.type = "status";
+      makeRequest(route);
     });
 
     if (route.status %2 === 0) {
