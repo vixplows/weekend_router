@@ -56,7 +56,15 @@ PopulateRoutesList.prototype.render = function (routes) {
   routes.forEach(function(route){
     var tr = document.createElement('tr');
     tr.classList.add('saved-list-item');
-    tr.id = "hit-this"
+    tr.id = "hit-this";
+
+    var mode = document.createElement('img');
+    if (route.mode === "WALKING") {
+      mode.src = "/images/walk.png"
+    } else {
+      mode.src = "/images/cycling.png"
+    };
+
     var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
     nameLi.classList.add('th-name');
@@ -80,6 +88,7 @@ PopulateRoutesList.prototype.render = function (routes) {
       makeRequest(route, requestComplete);
     });
 
+    tr.appendChild(mode);
     tr.appendChild(nameLi);
     statusButton.appendChild(inputOfButton);
     statusButton.appendChild(span);
@@ -89,18 +98,17 @@ PopulateRoutesList.prototype.render = function (routes) {
 
     var notes = document.createElement('th');
     notes.id = 'notes';
+    notes.innerText = (route.notes) ? route.notes : "";
     notes.addEventListener('click', function() {
-      var note = prompt("Add note");
-      if (note === null) {
-        notes.innerHTML = note;
-      } else if (note !== null) {
-        prompt(note)
-      };
-      // if (note != null) {
-      //   prompt(note)
-      // } else if {
-      //   notes.innerHTML = note;
-      // }
+      var message = (route.notes) ? route.note : "";
+      var note = prompt( message + "Please enter your note", "Update message");
+      if (note != null) {
+        notes.innerText = note;
+      }
+      route.notes = notes;
+      route.type = "notes";
+      makeRequest(route)
+
     });
 
     tr.appendChild(notes);
