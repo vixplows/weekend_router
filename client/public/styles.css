@@ -28,6 +28,7 @@ h2 {
 .saved-routes{
   float: left;
   margin: 10px;
+  cursor: pointer;
 }
 
 .saved-routes h2  {
@@ -47,7 +48,8 @@ h2 {
   height:400px;
   width:400px;
   margin-top: 8px;
-/*  border-radius: 10px;*/
+  z-index: 100;
+  border-radius: 10px;
 }
 
 input[type=text] {
@@ -126,7 +128,9 @@ input[type=text] {
 }
 
 .slider:after {
-  content: "YES";
+  content: "yes";
+  padding: 2px;
+  text-align: center;
   color: orange;
   font-size: 12px;
 }
@@ -149,11 +153,11 @@ input:checked + .slider:before {
 /* Rounded sliders */
 .slider {
   float: center;
-  border-radius: 34px;
+ /* border-radius: 34px;*/
 }
 
 .slider:before {
-  border-radius: 50%;
+ /* border-radius: 50%;*/
  /* color: darkcyan;*/
 }
 /* Tables! */
