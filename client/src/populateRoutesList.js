@@ -34,10 +34,11 @@ PopulateRoutesList.prototype.render = function (routes) {
 
   trTag.classList.add('saved-list');
 
-  nameTag.innerText = "Route"
-  doneTag.innerText = "Done?"
-  notesTag.innerText = "Notes"
-  deleteTag.innerText = "Remove"
+  nameTag.innerText = "ROUTE NAME"
+  doneTag.innerText = "DONE"
+  // notesTag.innerText = "NOTES"
+  deleteTag.innerText = "REMOVE"
+  notesTag.innerText = "NOTES"
 
   trTag.appendChild(nameTag);
   trTag.appendChild(doneTag);
