@@ -14,6 +14,18 @@ var makeRequest = function (options, callback) {
   } else if (options.type === "entry") {
     url = "/routes";
     routesRequest.open("GET", url);
+  }else if (options.type === "notes") {
+    var id = options._id;
+
+    var notes = options.notes.innerText;
+
+    body = JSON.stringify({
+      notes: notes
+    });
+
+    var url = "/routes/" + id + '/notes';
+    routesRequest.open("PUT", url);
+    console.log(notes);
   };
 
   routesRequest.setRequestHeader('Content-Type', 'application/json');
