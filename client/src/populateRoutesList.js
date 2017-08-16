@@ -42,8 +42,8 @@ PopulateRoutesList.prototype.render = function (routes) {
 
   trTag.appendChild(nameTag);
   trTag.appendChild(doneTag);
-  trTag.appendChild(deleteTag);
   trTag.appendChild(notesTag);
+  trTag.appendChild(deleteTag);
   tableTag.appendChild(trTag);
   start.appendChild(tableTag);
 
@@ -56,6 +56,7 @@ PopulateRoutesList.prototype.render = function (routes) {
   routes.forEach(function(route){
     var tr = document.createElement('tr');
     tr.classList.add('saved-list-item');
+    tr.id = "hit-this"
     var nameLi = document.createElement('th');
     nameLi.innerText = route.name;
     nameLi.classList.add('th-name');
@@ -85,7 +86,6 @@ PopulateRoutesList.prototype.render = function (routes) {
     tr.appendChild(statusButton);
     // thForSwitch.appendChild(statusButton);
     // tr.appendChild(thForSwitch)
-    tr.appendChild(deleteById);
 
     var notes = document.createElement('th');
     notes.classList.add('notes');
@@ -104,6 +104,7 @@ PopulateRoutesList.prototype.render = function (routes) {
     });
 
     tr.appendChild(notes);
+    tr.appendChild(deleteById);
     tableTag.appendChild(tr);
 
     /// Added in event listener so that when user clicks on route name ultimately that route will show in map
