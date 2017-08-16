@@ -1,16 +1,22 @@
 var AutoCompleteDirectionsHandler = require('./autoCompleteDirectionsHandler.js');
-var PopulateRoutesList = require('./PopulateRoutesList');
+var makeRequest = require('./request.js')
+var PopulateRoutesList = require('./populateRoutesList.js');
+
+var requestComplete = function () {
+  if(this.status !== 200) return;
+  var routesString = this.responseText;
+  var routes = JSON.parse(routesString);
+  new PopulateRoutesList(routes);
+};
 
 var routeSelected = function(evt, callback) {
   var startInput = document.querySelector("#start-input");
   var endInput = document.querySelector("#end-input");
   var modeSelector = document.querySelector("#mode-selector");
 
-  console.log("before: " + modeSelector.mode)
   if (!modeSelector.mode) {
     modeSelector.mode = 'WALKING';
   }
-  console.log("after: " + modeSelector.mode)
 
   var routeName;
   var proceed = false;
@@ -49,24 +55,6 @@ var routeSelected = function(evt, callback) {
   request.send(JSON.stringify(routeObject));
 };
 
-var makeRequest = function (callback) {
-  var url = "/routes";
-  var routesRequest = new XMLHttpRequest();
-
-  routesRequest.open("GET", url);
-  routesRequest.setRequestHeader('Content-Type', 'application/json');
-  routesRequest.addEventListener('load', callback);
-  routesRequest.send();
-};
-
-var requestComplete = function () {
-  if(this.status !== 200) return;
-
-  var routesString = this.responseText;
-  var routes = JSON.parse(routesString);
-  new PopulateRoutesList(routes);
-};
-
 function initMap() {
   var map = new google.maps.Map(document.getElementById('main-map'), {
     mapTypeControl: false,
@@ -79,8 +67,9 @@ function initMap() {
 var entry = function(){
   initMap();
 
-  makeRequest(requestComplete);
-
+  var options = {};
+  options.type = "entry";
+  makeRequest(options, requestComplete);
   var saveRoute = document.querySelector("#save-route");
   saveRoute.addEventListener('click', function() {
     routeSelected(this.responseText, requestComplete);
