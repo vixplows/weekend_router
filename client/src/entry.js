@@ -23,7 +23,7 @@ var displayPubs = function() {
   var directionsDisplay = new google.maps.DirectionsRenderer;
   map = new google.maps.Map(document.getElementById('main-map'), {
     zoom: 13
-  });
+});
   
 //google library added to render boxes to show points along our route
 var routeBoxer = new RouteBoxer();
