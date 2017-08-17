@@ -102,8 +102,8 @@ PopulateRoutesList.prototype.render = function (routes) {
     notes.id = 'notes';
     notes.innerText = (route.notes) ? route.notes : "";
     notes.addEventListener('click', function() {
-      var message = (route.notes) ? route.note : "";
-      var note = prompt( message + "Please enter your note", "Update message");
+      var message = (route.notes) ? route.notes : "";
+      var note = prompt( message, "Update message");
       if (note != null) {
         notes.innerText = note;
       }

@@ -27,7 +27,7 @@ entry.get('/routes', function(req, res){
   });
 });
 
-entry.put('/routes/:id', function(req, res){
+entry.put('/routes/:id/status', function(req, res){
   var id = req.params.id;
 
   db.collection('routes').update({'_id': new ObjectID(id)}, {
@@ -37,13 +37,14 @@ entry.put('/routes/:id', function(req, res){
   });
 });
 
-entry.put('/routes/:id/notes', function(req, res){
+entry.put('/routes/:id/:notes', function(req, res){
   var id = req.params.id;
+  var notes = req.params.notes;
+  // console.log(notes);
 
   db.collection('routes').update({'_id': new ObjectID(id)}, {
-    $set: {notes: req.body.notes}
+    $set: {notes: req.params.notes}
   });
-
   res.json({});
 });
 

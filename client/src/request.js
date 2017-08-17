@@ -9,7 +9,7 @@ var makeRequest = function (options, callback) {
     routesRequest.open("POST", url);
   } else if (options.type === "status") {
     var id = options._id;
-    var url = "/routes/" + id;
+    var url = "/routes/" + id + "/status";
     routesRequest.open("PUT", url);
   } else if (options.type === "entry") {
     url = "/routes";
@@ -17,13 +17,13 @@ var makeRequest = function (options, callback) {
   } else if (options.type === "notes") {
     var id = options._id;
 
-    var notes = options.notes.innerText;
+    var notes = options.notes.innerHTML;
 
     body = JSON.stringify({
       notes: notes
     });
 
-    var url = "/routes/" + id + "/notes";
+    var url = "/routes/" + id + "/" + notes;
     routesRequest.open("PUT", url);
     console.log(notes);
   };
