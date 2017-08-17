@@ -7,12 +7,19 @@ body {
   /*max-width: 700px;*/
 }
 
-h2 {
-  padding: 8px 10px;
+.window {
+  overflow: auto;
+  margin: auto;
+  width: 916px;
 }
 
-#header {
-  text-decoration: underline;
+h1 {
+  font-family: KangarooSong;
+  font-size: 50px;
+}
+
+h2 {
+  padding: 8px 10px;
 }
 
 .feature {
@@ -34,7 +41,7 @@ h2 {
 
 #routes-to-do {
   overflow-x: scroll;
-  max-height: 355px;
+  max-height: 362px;
   white-space: nowrap;
   flex: none;
   border: 1px solid #f5f1e6;
@@ -107,7 +114,10 @@ input[type=text] {
 
 .th-name {
   text-align: left;
-  width: 125px;
+  width: 165px;
+  max-width:165px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #remove-x {
@@ -219,7 +229,8 @@ th {
 
 #table-headers {
   text-align: center;
-
+  padding: 0px;
+  margin: 0px;
 }
 
 .saved-list th, td {
