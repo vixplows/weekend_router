@@ -132,8 +132,12 @@ input[type=text] {
   max-width: 100px;
 }
 
-#h-done {
+/*#h-done {
   text-align: left;
+}
+*/
+#h-remove {
+  width: 90px;
 }
 
 /*---------------------------------------*/
