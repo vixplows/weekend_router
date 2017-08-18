@@ -8,8 +8,51 @@ Users should be able to:
 2. Save routes to a wish-list
 3. Mark completed routes as ‘done’
 
-## Entry.js
+## Setup
 
+## Getting Started
+
+First use the clone down the repo, then unzip(if downloaded) in decided location.
+
+Run NPM dependencies command in terminal
+```sh
+$ npm install
+```
+<br>
+you will also need to require mongodb for the sever database.
+
+first of all you'll need to update your home brew with
+```sh
+brew update
+```
+
+once done you can install mongodb with
+```sh
+brew install mongodb -g
+```
+which will install mongodb globally (-g)
+<br>
+now we get to the good part, start up your new mongodb with
+```sh
+mongod
+```
+then start your sever with
+```sh
+npm start
+```
+to start up sever, which should be on localhost:3000
+<br>
+remeber if you want to edit the files you'll have to have webpack running(and our consent if your doing anything but playing with the code).
+to run webpack type
+```sh
+npm run bundle
+```
+## Tips of debugging
+```js
+function = function(event) {
+  console.log(event)
+}
+```
 ## Built With
 
 * [sublime](https://www.sublimetext.com/) - the lightweight text editor
