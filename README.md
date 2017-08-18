@@ -47,6 +47,9 @@ to run webpack type
 ```sh
 npm run bundle
 ```
+
+#### As an option you can download and install the font for the page
+It is called [KangarooSong]("http://www.1001freefonts.com/kangaroo_song.font")(click to download)
 ## Tips of debugging
 ```js
 function = function(event) {
