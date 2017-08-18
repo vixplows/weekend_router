@@ -1,18 +1,109 @@
 body {
-  background-color: #333;
-  color: white;
-  font-family: courier;
-  max-width: 700px;
+  background-color: #92998d;
+  color: #f5f1e6;
+  font-family: arial;
+
+
+  /*max-width: 700px;*/
 }
 
-#header {
-  text-decoration: underline;
+.window {
+  overflow: auto;
+  margin: auto;
+  width: 916px;
+}
+
+h1 {
+  font-family: KangarooSong;
+  font-size: 60px;
+}
+
+h2 {
+  padding: 8px 10px;
+}
+
+.feature {
+  float: left;
+}
+
+.saved-list {
+  border-bottom: 2px solid red;
+}/* not currentlly working even when showing in the browser */
+
+.saved-list-item {
+  height: 32px;
+  border-bottom: 1px solid orange;
+}/* not currentlly working even when showing in the browser */
+
+#hit-this:hover {
+  background-color: grey;
+}
+
+#routes-to-do {
+  overflow-x: scroll;
+  max-height: 362px;
+  white-space: nowrap;
+  flex: none;
+  border: 1px solid #f5f1e6;
+}
+
+.saved-routes{
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.saved-routes h2  {
+    margin: 0;
+}
+
+#notes {
+  width: 125px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 125px;
+  overflow: hidden;
+  font-weight: normal;
 }
 
 #main-map {
-  height:600px;
-  width:600px;
+  float: left;
+  height:400px;
+  width:400px;
+  margin-top: 8px;
+  z-index: 100;
+  border-radius: 10px;
+  color: black;
 }
+
+input[type=text] {
+    width: 280px;
+    padding: 8px 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 10px;
+}
+
+#save-route {
+ /* float: right;*/
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#show-pubs {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  margin-left: 5px;
+}
+
 
 .inputs {
   margin: 10px;
@@ -22,13 +113,44 @@ body {
   display: inline;
   list-style-type: none;
 }
+
+.th-name {
+  text-align: left;
+  width: 165px;
+  max-width:165px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#remove-x {
+  color: #511515;
+  padding-right: 50px;
+  /*padding-left: 10px*/
+
+}
+
+#h-name {
+  text-align: left;
+  max-width: 100px;
+}
+
+/*#h-done {
+  text-align: left;
+}
+*/
+#h-remove {
+  width: 90px;
+}
+
 /*---------------------------------------*/
  /*The switch - the box around the slider*/
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 24px;
+  margin-top: 4px;
+
 }
 
 /* Hide default HTML checkbox */
@@ -44,7 +166,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  /*background-color: #ccc;*/
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -52,17 +174,26 @@ body {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #f8c967;
   -webkit-transition: .4s;
   transition: .4s;
 }
 
+.slider:after {
+  content: "yes";
+  padding: 2px;
+  text-align: center;
+  color: orange;
+  font-size: 12px;
+}
+
 input:checked + .slider {
   background-color: #2196F3;
+  background-color: #f5f1e6;
 }
 
 input:focus + .slider {
@@ -70,16 +201,46 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
+  -webkit-transform: translateX(36px);
   -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  transform: translateX(36px);
 }
 
 /* Rounded sliders */
 .slider {
-  border-radius: 34px;
+  float: center;
+ /* border-radius: 34px;*/
 }
 
 .slider:before {
-  border-radius: 50%;
+ /* border-radius: 50%;*/
+ /* color: darkcyan;*/
+}
+/* Tables! */
+
+#directions {
+  float: left;
+}
+
+table {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+#table-headers {
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+}
+
+.saved-list th, td {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }

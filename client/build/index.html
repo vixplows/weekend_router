@@ -4,34 +4,49 @@
 <head>
   <title>Weekend Router</title>
   <script type="text/javascript", src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBxB0T4GfkMjt_VV9yKDqYvhK3DizksacI&libraries=places'></script>
+  <script type="text/javascript" src='routeBoxer.js'></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <script src='bundle.js'></script>
 </head>
 <body>
-  <div>
+  <div class="window">
     <h1 id="header">Weekend Router</h1>
-    <div class="inputs">
+    <div class="input">
       <input id="start-input" type="text" name="start" placeholder="Start"></input>
       <input id="end-input" type="text" name="end" placeholder="End"></input>
+      <button id="save-route" type="button">Save Route</button>
+      
+      </div>
 
       <div id="mode-selector" class="controls">
        <input type="radio" name="type" id="changemode-walking" checked="checked">
        <label for="changemode-walking">Walking</label>
        <input type="radio" name="type" id="changemode-bicycling">
        <label for="changemode-bicycling">Bicycling</label>
+       <button id="show-pubs" type="button">Show Pubs</button>
 
 
+      
+      
+    </div>
+      <div class="feature">
+        <div id='main-map'></div>
+        <div class="saved-routes">
+          <table id="table-headers"> 
+           <tr>
+            <th id='mode'>   </th>
+            <th id='h-name'>ROUTE NAME</th>
+            <th id='h-done'>DONE</th>
+            <th id='h-notes'>NOTES</th>
+            <th id='h-remove'>REMOVE</th>
+            </tr>
+          </table>
+          <div id="routes-to-do">
+        </div>
       </div>
-      <button id="save-route" type="button">Save Route</button>
     </div>
 
-    <div id='main-map'></div>
-
-    <div id="routes-to-do">
-      <h2>Saved Routes</h2>
-
-
-    </div>
+    <div id="directions"></div>
 
   </div>
 </body>
